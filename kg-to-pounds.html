@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KG to Pounds Converter - Tadaconvert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online KG to Pounds converter. Simple and accurate.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header><h1><a href="index.html">Tadaconvert</a></h1></header>
+  <main>
+    <div class="container">
+      <h2>KG to Pounds Converter</h2>
+      <p>Enter weight in kilograms:</p>
+      <input type="number" id="kg" placeholder="e.g. 70">
+      <button onclick="convert()">Convert</button>
+      <div class="result" id="result"></div>
+    </div>
+  </main>
+  <footer><p>&copy; 2025 Tadaconvert · Free Online Tools</p></footer>
+  <script>
+    function convert() {
+      const kg = parseFloat(document.getElementById('kg').value);
+      if (isNaN(kg)) {
+        document.getElementById('result').innerText = "Enter a valid number";
+        return;
+      }
+      const pounds = (kg * 2.20462).toFixed(2);
+      document.getElementById('result').innerText = `${kg} kg = ${pounds} pounds`;
+    }
+  </script>
+</body>
+</html>

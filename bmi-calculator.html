@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BMI Calculator - Tadaconvert</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f8fc;
+    }
+
+    h1 {
+      text-align: center;
+      color: #004080;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input {
+      padding: 8px;
+      margin-top: 5px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #004080;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0066cc;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e6f0ff;
+      border-left: 5px solid #004080;
+    }
+
+    #tips {
+      margin-top: 15px;
+      padding: 15px;
+      background: #fff8e6;
+      border-left: 5px solid #ffa500;
+    }
+  </style>
+</head>
+<body>
+  <h1>BMI Calculator</h1>
+  <label for="weight">Weight (in kg):</label>
+  <input type="number" id="weight" placeholder="Enter weight in kg" />
+
+  <label for="height">Height (in cm):</label>
+  <input type="number" id="height" placeholder="Enter height in cm" />
+
+  <button onclick="calculateBMI()">Calculate BMI</button>
+
+  <div id="result"></div>
+  <div id="tips"></div>
+
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById("weight").value);
+      const height = parseFloat(document.getElementById("height").value) / 100;
+
+      if (!weight || !height || height <= 0) {
+        document.getElementById("result").innerText = "Please enter valid values.";
+        document.getElementById("tips").innerText = "";
+        return;
+      }
+
+      const bmi = (weight / (height * height)).toFixed(2);
+      let status = "";
+      let tips = "";
+
+      if (bmi < 18.5) {
+        status = "Underweight";
+        tips = "Eat more frequent meals, include protein and healthy fats, and consider consulting a nutritionist.";
+      } else if (bmi >= 18.5 && bmi < 24.9) {
+        status = "Normal weight";
+        tips = "Maintain a balanced diet and regular exercise. Keep up the good work!";
+      } else if (bmi >= 25 && bmi < 29.9) {
+        status = "Overweight";
+        tips = "Incorporate more vegetables and fruits, reduce sugar intake, and add 30 minutes of daily walking.";
+      } else {
+        status = "Obese";
+        tips = "Consult a healthcare provider for a customized plan. Focus on gradual weight loss with diet and regular activity.";
+      }
+
+      document.getElementById("result").innerHTML = `<strong>BMI:</strong> ${bmi} — <strong>${status}</strong>`;
+      document.getElementById("tips").innerHTML = `<strong>Health Tip:</strong> ${tips}`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CM to Inches Converter - Tadaconvert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free online CM to Inches converter. Fast, simple, and accurate. No login required.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header, footer {
+      background-color: #222;
+      color: #fff;
+      padding: 1rem;
+    }
+    main {
+      padding: 2rem;
+    }
+    input, button {
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin-top: 1rem;
+      width: 100%;
+      max-width: 300px;
+    }
+    .result {
+      font-weight: bold;
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #007bff;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+    a {
+      color: #fff;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">Tadaconvert</a></h1>
+  </header>
+
+  <main>
+    <div class="container">
+      <h2>CM to Inches Converter</h2>
+      <p>Enter the length in centimeters:</p>
+      <input type="number" id="cm" placeholder="e.g. 180">
+      <button onclick="convert()">Convert</button>
+      <div class="result" id="result"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Tadaconvert · Free Online Tools</p>
+  </footer>
+
+  <script>
+    function convert() {
+      const cm = parseFloat(document.getElementById('cm').value);
+      if (isNaN(cm)) {
+        document.getElementById('result').innerText = "Please enter a valid number";
+        return;
+      }
+      const inches = (cm / 2.54).toFixed(2);
+      document.getElementById('result').innerText = `${cm} cm = ${inches} inches`;
+    }
+  </script>
+</body>
+</html>

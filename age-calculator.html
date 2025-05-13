@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Age Calculator - Tadaconvert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate your age in years with this simple online age calculator.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header><h1><a href="index.html">Tadaconvert</a></h1></header>
+  <main>
+    <div class="container">
+      <h2>Age Calculator</h2>
+      <p>Enter your birthdate:</p>
+      <input type="date" id="dob">
+      <button onclick="calculateAge()">Calculate</button>
+      <div class="result" id="result"></div>
+    </div>
+  </main>
+  <footer><p>&copy; 2025 Tadaconvert · Free Online Tools</p></footer>
+  <script>
+    function calculateAge() {
+      const dob = new Date(document.getElementById('dob').value);
+      if (isNaN(dob)) {
+        document.getElementById('result').innerText = "Enter a valid date";
+        return;
+      }
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      document.getElementById('result').innerText = `You are ${age} years old`;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Celsius to Fahrenheit - Tadaconvert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert Celsius to Fahrenheit online. Free, fast, and accurate.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header><h1><a href="index.html">Tadaconvert</a></h1></header>
+  <main>
+    <div class="container">
+      <h2>Celsius to Fahrenheit</h2>
+      <p>Enter temperature in Celsius:</p>
+      <input type="number" id="celsius" placeholder="e.g. 37">
+      <button onclick="convert()">Convert</button>
+      <div class="result" id="result"></div>
+    </div>
+  </main>
+  <footer><p>&copy; 2025 Tadaconvert · Free Online Tools</p></footer>
+  <script>
+    function convert() {
+      const c = parseFloat(document.getElementById('celsius').value);
+      if (isNaN(c)) {
+        document.getElementById('result').innerText = "Enter a valid number";
+        return;
+      }
+      const f = ((c * 9/5) + 32).toFixed(2);
+      document.getElementById('result').innerText = `${c}°C = ${f}°F`;
+    }
+  </script>
+</body>
+</html>
