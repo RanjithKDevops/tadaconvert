@@ -80,7 +80,7 @@
 <body>
   <h1>BMI Calculator</h1>
 
-  <form id="bmiForm" onsubmit="calculateBMI(); return false;">
+  <form id="bmiForm">
     <label for="weight">Weight (in kg):</label>
     <input type="number" id="weight" placeholder="Enter weight in kg" required />
 
@@ -98,46 +98,64 @@
   <div id="tips"></div>
 
   <script>
-    function calculateBMI() {
-      const weight = parseFloat(document.getElementById("weight").value);
-      const height = parseFloat(document.getElementById("height").value) / 100;
+    function calculateBMI(event) {
+      if (event) event.preventDefault();
 
-      if (!weight || !height || height <= 0) {
+      const weight = parseFloat(document.getElementById("weight").value);
+      const heightCm = parseFloat(document.getElementById("height").value);
+      const heightM = heightCm / 100;
+
+      if (!weight || !heightM || heightM <= 0) {
         document.getElementById("result").innerText = "Please enter valid values.";
         document.getElementById("tips").innerText = "";
         document.getElementById("bmiMeter").style.width = "0%";
         return;
       }
 
-      const bmi = (weight / (height * height)).toFixed(2);
+      const bmi = (weight / (heightM * heightM)).toFixed(2);
+      const bmiFloat = parseFloat(bmi);
       let status = "";
       let tips = "";
-      let color = "#4caf50"; // default green
+      let color = "#4caf50";
       let percent = 0;
+      let deltaText = "";
 
-      if (bmi < 18.5) {
+      const minNormalWeight = (18.5 * heightM * heightM).toFixed(1);
+      const maxNormalWeight = (24.9 * heightM * heightM).toFixed(1);
+
+      if (bmiFloat < 18.5) {
         status = "Underweight";
+        const neededGain = (minNormalWeight - weight).toFixed(1);
+        deltaText = `You need to gain approx ${neededGain} kg to reach a normal BMI.`;
         tips = "Eat more frequent meals, include protein and healthy fats, and consider consulting a nutritionist.";
-        color = "#00bcd4"; // light blue
+        color = "#00bcd4";
         percent = 20;
-      } else if (bmi >= 18.5 && bmi < 24.9) {
+      } else if (bmiFloat >= 18.5 && bmiFloat < 24.9) {
         status = "Normal weight";
+        deltaText = `Your ideal weight range is between ${minNormalWeight} kg and ${maxNormalWeight} kg.`;
         tips = "Maintain a balanced diet and regular exercise. Keep up the good work!";
-        color = "#4caf50"; // green
+        color = "#4caf50";
         percent = 40;
-      } else if (bmi >= 25 && bmi < 29.9) {
+      } else if (bmiFloat >= 25 && bmiFloat < 29.9) {
         status = "Overweight";
+        const neededLoss = (weight - maxNormalWeight).toFixed(1);
+        deltaText = `You need to lose approx ${neededLoss} kg to reach a normal BMI.`;
         tips = "Incorporate more vegetables and fruits, reduce sugar intake, and add 30 minutes of daily walking.";
-        color = "#ff9800"; // orange
+        color = "#ff9800";
         percent = 70;
       } else {
         status = "Obese";
+        const neededLoss = (weight - maxNormalWeight).toFixed(1);
+        deltaText = `You need to lose approx ${neededLoss} kg to reach a normal BMI.`;
         tips = "Consult a healthcare provider for a customized plan. Focus on gradual weight loss with diet and regular activity.";
-        color = "#f44336"; // red
+        color = "#f44336";
         percent = 90;
       }
 
-      document.getElementById("result").innerHTML = `<strong>BMI:</strong> ${bmi} — <strong>${status}</strong>`;
+      document.getElementById("result").innerHTML = `
+        <strong>BMI:</strong> ${bmi} — <strong>${status}</strong><br/>
+        ${deltaText}
+      `;
       document.getElementById("tips").innerHTML = `<strong>Health Tip:</strong> ${tips}`;
 
       const meter = document.getElementById("bmiMeter");
@@ -145,6 +163,8 @@
       meter.style.backgroundColor = color;
       meter.textContent = `${bmi}`;
     }
+
+    document.getElementById("bmiForm").addEventListener("submit", calculateBMI);
   </script>
 </body>
 </html>
