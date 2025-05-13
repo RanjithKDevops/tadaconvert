@@ -2,80 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Tadaconvert is a free online tool offering simple converters and calculators like CM to Inches, BMI, Age, and more." />
-  <title>Welcome to Tadaconvert!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tadaconvert - Free Online Calculators and Converters</title>
   <link rel="stylesheet" href="css/style.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
       padding: 0;
+      background: #f4f8fc;
     }
 
-    header, footer {
-      background-color: #004080;
+    header {
+      background: #004080;
       color: white;
       padding: 20px;
       text-align: center;
     }
 
-    main {
-      padding: 20px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
     h1 {
-      text-align: center;
-      margin-bottom: 30px;
+      margin: 0;
+      font-size: 2.5rem;
     }
 
-    ul {
+    .container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      margin: 30px 0 10px;
+      color: #004080;
+      font-size: 1.6rem;
+      border-bottom: 2px solid #004080;
+      padding-bottom: 5px;
+    }
+
+    ul.tool-list {
       list-style: none;
       padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
     }
 
-    li {
-      margin: 15px 0;
+    ul.tool-list li {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
     }
 
-    a {
+    ul.tool-list li:hover {
+      transform: scale(1.03);
+    }
+
+    ul.tool-list a {
       text-decoration: none;
       color: #004080;
-      font-size: 18px;
-      background: #e6f0ff;
-      padding: 10px 15px;
+      font-weight: bold;
       display: block;
-      border-radius: 5px;
-      transition: background 0.2s ease;
     }
 
-    a:hover {
-      background: #cce0ff;
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #004080;
+      color: white;
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Welcome to Tadaconvert!</h1>
-    <p>Free Online Tools for Quick Conversions</p>
+    <h1>Tadaconvert</h1>
+    <p>Your simple, fast and reliable online tool hub</p>
   </header>
 
-  <main>
-    <h2>Popular Tools</h2>
-    <ul>
-      <li><a href="cm-to-inches.html">CM to Inches Converter</a></li>
-      <li><a href="kg-to-pounds.html">KG to Pounds Converter</a></li>
-      <li><a href="celsius-to-fahrenheit.html">Celsius to Fahrenheit Converter</a></li>
-      <li><a href="bmi-calculator.html">BMI Calculator</a></li>
-      <li><a href="age-calculator.html">Age Calculator</a></li>
-    </ul>
-  </main>
+  <div class="container">
+    <div class="section">
+      <h2 class="section-title">Health & Fitness</h2>
+      <ul class="tool-list">
+        <li><a href="bmi-calculator.html">BMI Calculator</a></li>
+        <li><a href="age-calculator.html">Age Calculator</a></li>
+        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+        <li><a href="pregnancy-calculator.html">Pregnancy Calculator</a></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Unit Converters</h2>
+      <ul class="tool-list">
+        <li><a href="celsius-to-fahrenheit.html">Celsius to Fahrenheit</a></li>
+        <li><a href="cm-to-inches.html">CM to Inches</a></li>
+        <li><a href="kg-to-pounds.html">KG to Pounds</a></li>
+      </ul>
+    </div>
+  </div>
 
   <footer>
-    <p>© 2025 Tadaconvert.com | All rights reserved</p>
+    &copy; 2025 Tadaconvert.com | All Rights Reserved
   </footer>
 </body>
 </html>

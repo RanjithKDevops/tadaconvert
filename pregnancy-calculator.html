@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pregnancy Calculator - Tadaconvert</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #004080;
+    }
+    label, input {
+      display: block;
+      margin: 10px auto;
+      max-width: 300px;
+      width: 100%;
+    }
+    input {
+      padding: 8px;
+    }
+    button {
+      background-color: #004080;
+      color: white;
+      padding: 10px;
+      border: none;
+      cursor: pointer;
+      margin: 10px auto;
+      display: block;
+    }
+    button:hover {
+      background-color: #0066cc;
+    }
+    #result {
+      background: #e6f0ff;
+      margin-top: 20px;
+      padding: 15px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      border-left: 5px solid #004080;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pregnancy Calculator</h1>
+
+  <label for="lmp">Enter the First Day of Your Last Menstrual Period (LMP):</label>
+  <input type="date" id="lmp" />
+
+  <button onclick="calculateDueDate()">Calculate Due Date</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateDueDate() {
+      const lmpInput = document.getElementById("lmp").value;
+      if (!lmpInput) {
+        document.getElementById("result").innerText = "Please enter your LMP date.";
+        return;
+      }
+
+      const lmpDate = new Date(lmpInput);
+      const dueDate = new Date(lmpDate);
+      dueDate.setDate(lmpDate.getDate() + 280); // 280 days = 40 weeks
+
+      const today = new Date();
+      const daysPregnant = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24));
+      const weeksPregnant = Math.floor(daysPregnant / 7);
+      const daysRemaining = 280 - daysPregnant;
+
+      document.getElementById("result").innerHTML = `
+        <strong>Estimated Due Date:</strong> ${dueDate.toDateString()}<br />
+        <strong>Weeks Pregnant:</strong> ${weeksPregnant} weeks<br />
+        <strong>Days Remaining:</strong> ${daysRemaining > 0 ? daysRemaining : "Due or overdue"} days
+      `;
+    }
+
+    // Allow Enter key
+    document.getElementById("lmp").addEventListener("keypress", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        calculateDueDate();
+      }
+    });
+  </script>
+</body>
+</html>

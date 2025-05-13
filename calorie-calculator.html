@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calorie Calculator - Tadaconvert</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9fbfd;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      width: 100%;
+      background: #2c3e50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #34495e;
+    }
+
+    #result {
+      margin-top: 30px;
+      background: #eaf2f8;
+      padding: 20px;
+      border-left: 5px solid #3498db;
+    }
+  </style>
+</head>
+<body>
+  <h1>Calorie Calculator</h1>
+
+  <form id="calorieForm">
+    <label for="age">Age (years):</label>
+    <input type="number" id="age" required />
+
+    <label for="gender">Gender:</label>
+    <select id="gender">
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" required />
+
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" required />
+
+    <label for="activity">Activity Level:</label>
+    <select id="activity">
+      <option value="1.2">Sedentary (little or no exercise)</option>
+      <option value="1.375">Lightly active (light exercise/sports 1–3 days/week)</option>
+      <option value="1.55">Moderately active (moderate exercise/sports 3–5 days/week)</option>
+      <option value="1.725">Very active (hard exercise/sports 6–7 days/week)</option>
+      <option value="1.9">Super active (very hard exercise/physical job)</option>
+    </select>
+
+    <label for="idealWeight">Ideal Weight (kg):</label>
+    <input type="number" id="idealWeight" placeholder="Auto-filled" />
+
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    document.getElementById("calorieForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      calculateCalories();
+    });
+
+    // Auto-calculate Ideal Weight based on height
+    document.getElementById("height").addEventListener("input", function() {
+      const heightCm = parseFloat(this.value);
+      if (heightCm > 0) {
+        const heightM = heightCm / 100;
+        const idealBMI = 22;
+        const idealWeight = (idealBMI * heightM * heightM).toFixed(1);
+        document.getElementById("idealWeight").value = idealWeight;
+      }
+    });
+
+    function calculateCalories() {
+      const age = parseInt(document.getElementById("age").value);
+      const gender = document.getElementById("gender").value;
+      const weight = parseFloat(document.getElementById("weight").value);
+      const height = parseFloat(document.getElementById("height").value);
+      const activity = parseFloat(document.getElementById("activity").value);
+      const idealWeight = parseFloat(document.getElementById("idealWeight").value);
+
+      if (!age || !weight || !height || !idealWeight || activity === 0) {
+        document.getElementById("result").innerHTML = "Please fill all fields correctly.";
+        return;
+      }
+
+      let bmr;
+      if (gender === "male") {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+
+      const maintenanceCalories = bmr * activity;
+      const loseHalfKg = maintenanceCalories - 500;
+      const loseOneKg = maintenanceCalories - 1000;
+
+      const weightToLose = weight - idealWeight;
+      let weeks = weightToLose / 0.5;
+      const months = (weeks / 4).toFixed(1);
+
+      let timeMessage = "";
+      if (weightToLose > 0) {
+        timeMessage = `Estimated time to reach your ideal weight:
+          <ul>
+            <li>At 0.5 kg/week: ~${Math.ceil(weeks)} weeks (${months} months)</li>
+            <li>At 1 kg/week: ~${Math.ceil(weeks / 2)} weeks (${(months / 2).toFixed(1)} months)</li>
+          </ul>`;
+      } else {
+        timeMessage = "You're already at or below your ideal weight!";
+      }
+
+      document.getElementById("result").innerHTML = `
+        <strong>Maintenance Calories:</strong> ${maintenanceCalories.toFixed(0)} kcal/day<br/>
+        <strong>To lose 0.5 kg/week:</strong> ${loseHalfKg.toFixed(0)} kcal/day<br/>
+        <strong>To lose 1 kg/week:</strong> ${loseOneKg.toFixed(0)} kcal/day<br/>
+        <br/>
+        ${timeMessage}
+      `;
+    }
+  </script>
+</body>
+</html>
