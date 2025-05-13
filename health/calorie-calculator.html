@@ -4,100 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calorie Calculator - Tadaconvert</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="../css/style.css" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f9fbfd;
+    .calorie-calculator {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 25px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    h1 {
+    .calculator-title {
       text-align: center;
-      color: #2c3e50;
+      color: #004080;
+      margin-bottom: 25px;
     }
 
-    form {
-      max-width: 400px;
-      margin: auto;
+    .input-group {
+      margin-bottom: 20px;
     }
 
-    label {
+    .input-group label {
       display: block;
-      margin-top: 15px;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
     }
 
-    input, select {
+    .input-group input,
+    .input-group select {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 10px;
+    .input-group input:focus,
+    .input-group select:focus {
+      border-color: #004080;
+      outline: none;
+    }
+
+    .calculate-btn {
       width: 100%;
-      background: #2c3e50;
+      padding: 12px;
+      background: #004080;
       color: white;
       border: none;
+      border-radius: 5px;
+      font-size: 16px;
       cursor: pointer;
+      transition: background 0.3s;
     }
 
-    button:hover {
-      background: #34495e;
+    .calculate-btn:hover {
+      background: #0066cc;
     }
 
-    #result {
+    .result-container {
       margin-top: 30px;
-      background: #eaf2f8;
       padding: 20px;
-      border-left: 5px solid #3498db;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .result-title {
+      color: #004080;
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+
+    .result-value {
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .time-estimate {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>Calorie Calculator</h1>
+  <div class="calorie-calculator">
+    <h1 class="calculator-title">Calorie Calculator</h1>
 
-  <form id="calorieForm">
-    <label for="age">Age (years):</label>
-    <input type="number" id="age" required />
+    <form id="calorieForm">
+      <div class="input-group">
+        <label for="age">Age (years)</label>
+        <input type="number" id="age" min="15" max="120" required>
+      </div>
 
-    <label for="gender">Gender:</label>
-    <select id="gender">
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
+      <div class="input-group">
+        <label for="gender">Gender</label>
+        <select id="gender" required>
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
 
-    <label for="weight">Weight (kg):</label>
-    <input type="number" id="weight" required />
+      <div class="input-group">
+        <label for="weight">Current Weight (kg)</label>
+        <input type="number" id="weight" min="30" max="300" step="0.1" required>
+      </div>
 
-    <label for="height">Height (cm):</label>
-    <input type="number" id="height" required />
+      <div class="input-group">
+        <label for="height">Height (cm)</label>
+        <input type="number" id="height" min="100" max="250" step="0.1" required>
+      </div>
 
-    <label for="activity">Activity Level:</label>
-    <select id="activity">
-      <option value="1.2">Sedentary (little or no exercise)</option>
-      <option value="1.375">Lightly active (light exercise/sports 1–3 days/week)</option>
-      <option value="1.55">Moderately active (moderate exercise/sports 3–5 days/week)</option>
-      <option value="1.725">Very active (hard exercise/sports 6–7 days/week)</option>
-      <option value="1.9">Super active (very hard exercise/physical job)</option>
-    </select>
+      <div class="input-group">
+        <label for="activity">Activity Level</label>
+        <select id="activity" required>
+          <option value="">Select Activity Level</option>
+          <option value="1.2">Sedentary (little or no exercise)</option>
+          <option value="1.375">Lightly active (light exercise/sports 1-3 days/week)</option>
+          <option value="1.55">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+          <option value="1.725">Very active (hard exercise/sports 6-7 days/week)</option>
+          <option value="1.9">Super active (very hard exercise/physical job)</option>
+        </select>
+      </div>
 
-    <label for="idealWeight">Ideal Weight (kg):</label>
-    <input type="number" id="idealWeight" placeholder="Auto-filled" />
+      <div class="input-group">
+        <label for="idealWeight">Target Weight (kg)</label>
+        <input type="number" id="idealWeight" min="30" max="300" step="0.1" required>
+      </div>
 
-    <button type="submit">Calculate</button>
-  </form>
+      <button type="submit" class="calculate-btn">Calculate Calories</button>
+    </form>
 
-  <div id="result"></div>
+    <div class="result-container hidden" id="resultContainer">
+      <h3 class="result-title">Your Calorie Needs</h3>
+      
+      <div class="result-value" id="maintenanceCalories"></div>
+      <div class="result-value" id="weightLossCalories"></div>
+      
+      <div class="time-estimate" id="timeEstimate"></div>
+    </div>
+  </div>
 
   <script>
+    // Form submission handler
     document.getElementById("calorieForm").addEventListener("submit", function(e) {
       e.preventDefault();
       calculateCalories();
     });
 
-    // Auto-calculate Ideal Weight based on height
+    // Auto-calculate ideal weight when height changes
     document.getElementById("height").addEventListener("input", function() {
       const heightCm = parseFloat(this.value);
       if (heightCm > 0) {
@@ -108,7 +169,9 @@
       }
     });
 
+    // Main calculation function
     function calculateCalories() {
+      // Get input values
       const age = parseInt(document.getElementById("age").value);
       const gender = document.getElementById("gender").value;
       const weight = parseFloat(document.getElementById("weight").value);
@@ -116,11 +179,13 @@
       const activity = parseFloat(document.getElementById("activity").value);
       const idealWeight = parseFloat(document.getElementById("idealWeight").value);
 
-      if (!age || !weight || !height || !idealWeight || activity === 0) {
-        document.getElementById("result").innerHTML = "Please fill all fields correctly.";
+      // Validate inputs
+      if (!age || !gender || !weight || !height || !activity || !idealWeight) {
+        alert("Please fill all fields with valid values");
         return;
       }
 
+      // Calculate BMR (Basal Metabolic Rate)
       let bmr;
       if (gender === "male") {
         bmr = 10 * weight + 6.25 * height - 5 * age + 5;
@@ -128,32 +193,38 @@
         bmr = 10 * weight + 6.25 * height - 5 * age - 161;
       }
 
-      const maintenanceCalories = bmr * activity;
+      // Calculate daily calorie needs
+      const maintenanceCalories = Math.round(bmr * activity);
       const loseHalfKg = maintenanceCalories - 500;
       const loseOneKg = maintenanceCalories - 1000;
 
+      // Calculate time estimates
       const weightToLose = weight - idealWeight;
-      let weeks = weightToLose / 0.5;
-      const months = (weeks / 4).toFixed(1);
-
       let timeMessage = "";
+      
       if (weightToLose > 0) {
-        timeMessage = `Estimated time to reach your ideal weight:
+        const weeksHalfKg = Math.ceil(weightToLose / 0.5);
+        const weeksOneKg = Math.ceil(weightToLose / 1);
+        
+        timeMessage = `
+          <strong>Time to reach target weight:</strong>
           <ul>
-            <li>At 0.5 kg/week: ~${Math.ceil(weeks)} weeks (${months} months)</li>
-            <li>At 1 kg/week: ~${Math.ceil(weeks / 2)} weeks (${(months / 2).toFixed(1)} months)</li>
-          </ul>`;
+            <li>At 0.5 kg/week: ~${weeksHalfKg} weeks (${(weeksHalfKg/4).toFixed(1)} months)</li>
+            <li>At 1 kg/week: ~${weeksOneKg} weeks (${(weeksOneKg/4).toFixed(1)} months)</li>
+          </ul>
+          <p>Note: These are estimates. Individual results may vary.</p>
+        `;
       } else {
-        timeMessage = "You're already at or below your ideal weight!";
+        timeMessage = "You're already at or below your target weight!";
       }
 
-      document.getElementById("result").innerHTML = `
-        <strong>Maintenance Calories:</strong> ${maintenanceCalories.toFixed(0)} kcal/day<br/>
-        <strong>To lose 0.5 kg/week:</strong> ${loseHalfKg.toFixed(0)} kcal/day<br/>
-        <strong>To lose 1 kg/week:</strong> ${loseOneKg.toFixed(0)} kcal/day<br/>
-        <br/>
-        ${timeMessage}
-      `;
+      // Display results
+      document.getElementById("resultContainer").classList.remove("hidden");
+      document.getElementById("maintenanceCalories").innerHTML = 
+        `<strong>Maintenance:</strong> ${maintenanceCalories} kcal/day`;
+      document.getElementById("weightLossCalories").innerHTML = 
+        `<strong>Weight Loss:</strong> ${loseHalfKg} kcal/day (0.5kg/week) | ${loseOneKg} kcal/day (1kg/week)`;
+      document.getElementById("timeEstimate").innerHTML = timeMessage;
     }
   </script>
 </body>
