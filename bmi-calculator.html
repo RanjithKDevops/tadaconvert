@@ -42,23 +42,46 @@
       background: #0066cc;
     }
 
-    #result {
+    #result, #tips {
       margin-top: 20px;
       padding: 15px;
+      border-radius: 8px;
+    }
+
+    #result {
       background: #e6f0ff;
       border-left: 5px solid #004080;
     }
 
     #tips {
-      margin-top: 15px;
-      padding: 15px;
       background: #fff8e6;
       border-left: 5px solid #ffa500;
     }
+
+    .meter-container {
+      margin-top: 15px;
+      background: #eee;
+      border-radius: 10px;
+      height: 20px;
+      width: 100%;
+      max-width: 300px;
+      overflow: hidden;
+    }
+
+    .meter-bar {
+      height: 100%;
+      transition: width 0.5s;
+    }
+
+    .underweight { background-color: #00bfff; }
+    .normal { background-color: #28a745; }
+    .overweight { background-color: #ffc107; }
+    .obese { background-color: #dc3545; }
   </style>
 </head>
 <body>
   <h1>BMI Calculator</h1>
+
   <label for="weight">Weight (in kg):</label>
   <input type="number" id="weight" placeholder="Enter weight in kg" />
 
@@ -67,13 +90,18 @@
 
   <button onclick="calculateBMI()">Calculate BMI</button>
 
+  <div class="meter-container">
+    <div id="bmiMeter" class="meter-bar" style="width: 0%"></div>
+  </div>
+
   <div id="result"></div>
   <div id="tips"></div>
 
   <script>
     function calculateBMI() {
       const weight = parseFloat(document.getElementById("weight").value);
-      const height = parseFloat(document.getElementById("height").value) / 100;
+      const heightCm = parseFloat(document.getElementById("height").value);
+      const height = heightCm / 100;
 
       if (!weight || !height || height <= 0) {
         document.getElementById("result").innerText = "Please enter valid values.";
@@ -81,26 +109,49 @@
         return;
       }
 
-      const bmi = (weight / (height * height)).toFixed(2);
-      let status = "";
-      let tips = "";
+      const bmi = (weight / (height * height)).toFixed(1);
+      const meter = document.getElementById("bmiMeter");
+      const result = document.getElementById("result");
+      const tips = document.getElementById("tips");
+
+      let status = "", message = "", barClass = "";
 
       if (bmi < 18.5) {
         status = "Underweight";
-        tips = "Eat more frequent meals, include protein and healthy fats, and consider consulting a nutritionist.";
-      } else if (bmi >= 18.5 && bmi < 24.9) {
+        message = "Eat more frequent meals, include protein and healthy fats.";
+        barClass = "underweight";
+      } else if (bmi < 25) {
         status = "Normal weight";
-        tips = "Maintain a balanced diet and regular exercise. Keep up the good work!";
-      } else if (bmi >= 25 && bmi < 29.9) {
+        message = "Maintain a balanced diet and regular exercise.";
+        barClass = "normal";
+      } else if (bmi < 30) {
         status = "Overweight";
-        tips = "Incorporate more vegetables and fruits, reduce sugar intake, and add 30 minutes of daily walking.";
+        message = "Reduce sugar intake, add 30 minutes of daily walking.";
+        barClass = "overweight";
       } else {
         status = "Obese";
-        tips = "Consult a healthcare provider for a customized plan. Focus on gradual weight loss with diet and regular activity.";
+        message = "Consult a healthcare provider for a customized plan.";
+        barClass = "obese";
       }
 
-      document.getElementById("result").innerHTML = `<strong>BMI:</strong> ${bmi} — <strong>${status}</strong>`;
-      document.getElementById("tips").innerHTML = `<strong>Health Tip:</strong> ${tips}`;
+      // Calculate ideal weight range
+      const minWeight = (18.5 * height * height).toFixed(1);
+      const maxWeight = (24.9 * height * height).toFixed(1);
+      let weightTip = "";
+
+      if (bmi < 18.5) {
+        weightTip = `You should gain at least ${(minWeight - weight).toFixed(1)} kg to reach a normal BMI.`;
+      } else if (bmi >= 25) {
+        weightTip = `You should lose about ${(weight - maxWeight).toFixed(1)} kg to reach a normal BMI.`;
+      }
+
+      result.innerHTML = `<strong>BMI:</strong> ${bmi} — <strong>${status}</strong><br>${weightTip}`;
+      tips.innerHTML = `<strong>Health Tip:</strong> ${message}`;
+
+      // Update visual meter
+      let meterWidth = Math.min(Math.max((bmi / 40) * 100, 5), 100); // Cap between 5% and 100%
+      meter.className = `meter-bar ${barClass}`;
+      meter.style.width = meterWidth + "%";
     }
   </script>
 </body>
