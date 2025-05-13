@@ -18,6 +18,7 @@
       color: white;
       padding: 20px;
       text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     h1 {
@@ -52,11 +53,12 @@
       padding: 15px;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     ul.tool-list li:hover {
-      transform: scale(1.03);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
     ul.tool-list a {
@@ -64,6 +66,7 @@
       color: #004080;
       font-weight: bold;
       display: block;
+      height: 100%;
     }
 
     footer {
@@ -72,6 +75,20 @@
       background: #004080;
       color: white;
       margin-top: 40px;
+      font-size: 0.9rem;
+    }
+
+    /* Search box */
+    .search-container {
+      margin: 20px auto;
+      max-width: 500px;
+    }
+    #search {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 1rem;
     }
   </style>
 </head>
@@ -82,22 +99,27 @@
   </header>
 
   <div class="container">
+    <!-- Search Box -->
+    <div class="search-container">
+      <input type="text" id="search" placeholder="🔍 Search calculators..." onkeyup="searchTools()">
+    </div>
+
     <div class="section">
       <h2 class="section-title">Health & Fitness</h2>
       <ul class="tool-list">
-        <li><a href="bmi-calculator.html">BMI Calculator</a></li>
-        <li><a href="age-calculator.html">Age Calculator</a></li>
-        <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
-        <li><a href="pregnancy-calculator.html">Pregnancy Calculator</a></li>
+        <li><a href="health/bmi-calculator.html">BMI Calculator</a></li>
+        <li><a href="health/age-calculator.html">Age Calculator</a></li>
+        <li><a href="health/calorie-calculator.html">Calorie Calculator</a></li>
+        <li><a href="health/pregnancy-calculator.html">Pregnancy Calculator</a></li>
       </ul>
     </div>
 
     <div class="section">
       <h2 class="section-title">Unit Converters</h2>
       <ul class="tool-list">
-        <li><a href="celsius-to-fahrenheit.html">Celsius to Fahrenheit</a></li>
-        <li><a href="cm-to-inches.html">CM to Inches</a></li>
-        <li><a href="kg-to-pounds.html">KG to Pounds</a></li>
+        <li><a href="converters/temperature/celsius-to-fahrenheit.html">Celsius to Fahrenheit</a></li>
+        <li><a href="converters/length/cm-to-inches.html">CM to Inches</a></li>
+        <li><a href="converters/weight/kg-to-pounds.html">KG to Pounds</a></li>
       </ul>
     </div>
   </div>
@@ -105,5 +127,16 @@
   <footer>
     &copy; 2025 Tadaconvert.com | All Rights Reserved
   </footer>
+
+  <script>
+    // Search functionality
+    function searchTools() {
+      const searchTerm = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('.tool-list li').forEach(item => {
+        const text = item.textContent.toLowerCase();
+        item.style.display = text.includes(searchTerm) ? 'block' : 'none';
+      });
+    }
+  </script>
 </body>
 </html>
