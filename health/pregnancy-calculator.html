@@ -3,91 +3,521 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pregnancy Calculator - Tadaconvert</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>Advanced Pregnancy Calculator - Tadaconvert</title>
+  <link rel="stylesheet" href="../css/style.css" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      padding: 20px;
+    .pregnancy-calculator {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 30px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
     }
-    h1 {
+
+    .calculator-title {
       text-align: center;
       color: #004080;
+      margin-bottom: 10px;
     }
-    label, input {
+
+    .calculator-subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
       display: block;
-      margin: 10px auto;
-      max-width: 300px;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .input-group input {
       width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
     }
-    input {
-      padding: 8px;
+
+    .input-group input:focus {
+      border-color: #004080;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0,64,128,0.1);
     }
-    button {
-      background-color: #004080;
+
+    .calculate-btn {
+      width: 100%;
+      padding: 14px;
+      background: #004080;
       color: white;
-      padding: 10px;
       border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 500;
       cursor: pointer;
-      margin: 10px auto;
-      display: block;
+      transition: background 0.3s;
     }
-    button:hover {
-      background-color: #0066cc;
+
+    .calculate-btn:hover {
+      background: #0066cc;
     }
-    #result {
-      background: #e6f0ff;
-      margin-top: 20px;
+
+    .result-container {
+      margin-top: 30px;
+      padding: 25px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .result-title {
+      color: #004080;
+      margin-bottom: 15px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    .pregnancy-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .summary-box {
       padding: 15px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .summary-value {
+      font-size: 20px;
+      font-weight: bold;
+      color: #004080;
+      margin-bottom: 5px;
+    }
+
+    .summary-label {
+      font-size: 14px;
+      color: #666;
+    }
+
+    .trimester-info {
+      margin: 25px 0;
+      padding: 20px;
+      background: #fff8e6;
+      border-radius: 5px;
+      border-left: 4px solid #ffa500;
+    }
+
+    .milestones {
+      margin-top: 25px;
+    }
+
+    .milestone {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .milestone-date {
+      min-width: 120px;
+      font-weight: bold;
+      color: #004080;
+    }
+
+    .milestone-desc {
+      flex-grow: 1;
+    }
+
+    .progress-container {
+      margin: 25px 0;
+      height: 20px;
+      background: #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: #004080;
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .progress-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .week-details {
+      margin-top: 25px;
+    }
+
+    .week-card {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 15px;
+      background: white;
+    }
+
+    .current-week {
       border-left: 5px solid #004080;
+      background: #f0f7ff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .share-buttons {
+      margin-top: 25px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .share-btn {
+      padding: 10px 20px;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .share-btn:hover {
+      background: #0066cc;
+    }
+
+    .copy-btn {
+      background: #4CAF50;
+    }
+
+    .copy-btn:hover {
+      background: #45a049;
+    }
+
+    @media (max-width: 600px) {
+      .pregnancy-calculator {
+        padding: 20px;
+      }
+      .pregnancy-summary {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Pregnancy Calculator</h1>
+  <div class="pregnancy-calculator">
+    <h1 class="calculator-title">Pregnancy Calculator</h1>
+    <p class="calculator-subtitle">Track your pregnancy journey with detailed milestones and weekly updates</p>
 
-  <label for="lmp">Enter the First Day of Your Last Menstrual Period (LMP):</label>
-  <input type="date" id="lmp" />
+    <form id="pregnancyForm">
+      <div class="input-group">
+        <label for="lmp">First Day of Last Menstrual Period (LMP)</label>
+        <input type="date" id="lmp" required>
+      </div>
 
-  <button onclick="calculateDueDate()">Calculate Due Date</button>
+      <div class="input-group">
+        <label for="ultrasound">Ultrasound Due Date (optional)</label>
+        <input type="date" id="ultrasound">
+      </div>
 
-  <div id="result"></div>
+      <div class="input-group">
+        <label for="conception">Estimated Conception Date (optional)</label>
+        <input type="date" id="conception">
+      </div>
+
+      <button type="submit" class="calculate-btn">Calculate Pregnancy Details</button>
+    </form>
+
+    <div class="result-container hidden" id="resultContainer">
+      <h3 class="result-title">Your Pregnancy Timeline</h3>
+      
+      <div class="pregnancy-summary">
+        <div class="summary-box">
+          <div class="summary-value" id="dueDate">--</div>
+          <div class="summary-label">Due Date</div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-value" id="weeksPregnant">--</div>
+          <div class="summary-label">Weeks Pregnant</div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-value" id="daysRemaining">--</div>
+          <div class="summary-label">Days Remaining</div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-value" id="trimester">--</div>
+          <div class="summary-label">Current Trimester</div>
+        </div>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+        <div class="progress-label" id="progressLabel">0% Complete</div>
+      </div>
+
+      <div class="trimester-info" id="trimesterInfo"></div>
+
+      <div class="milestones">
+        <h4>Key Pregnancy Milestones</h4>
+        <div id="milestonesList"></div>
+      </div>
+
+      <div class="week-details">
+        <h4>This Week in Your Pregnancy</h4>
+        <div class="week-card current-week" id="currentWeekCard"></div>
+      </div>
+
+      <div class="share-buttons">
+        <button class="share-btn copy-btn" onclick="copyResults()">
+          <span>📋</span> Copy Results
+        </button>
+        <button class="share-btn" onclick="shareResults()">
+          <span>📤</span> Share
+        </button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    function calculateDueDate() {
+    document.getElementById("pregnancyForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      calculatePregnancy();
+    });
+
+    function calculatePregnancy() {
       const lmpInput = document.getElementById("lmp").value;
       if (!lmpInput) {
-        document.getElementById("result").innerText = "Please enter your LMP date.";
+        alert("Please enter your LMP date");
         return;
       }
 
       const lmpDate = new Date(lmpInput);
-      const dueDate = new Date(lmpDate);
-      dueDate.setDate(lmpDate.getDate() + 280); // 280 days = 40 weeks
-
       const today = new Date();
+      
+      // Calculate using LMP (standard 280 days/40 weeks)
+      let dueDate = new Date(lmpDate);
+      dueDate.setDate(lmpDate.getDate() + 280);
+      
+      // Adjust with ultrasound date if available
+      const ultrasoundInput = document.getElementById("ultrasound").value;
+      if (ultrasoundInput) {
+        const ultrasoundDate = new Date(ultrasoundInput);
+        // Average between LMP and ultrasound dates
+        const avgTimestamp = (dueDate.getTime() + ultrasoundDate.getTime()) / 2;
+        dueDate = new Date(avgTimestamp);
+      }
+
+      // Calculate progress
       const daysPregnant = Math.floor((today - lmpDate) / (1000 * 60 * 60 * 24));
       const weeksPregnant = Math.floor(daysPregnant / 7);
-      const daysRemaining = 280 - daysPregnant;
+      const daysRemaining = Math.max(0, 280 - daysPregnant);
+      const percentComplete = Math.min(100, (daysPregnant / 280 * 100)).toFixed(1);
 
-      document.getElementById("result").innerHTML = `
-        <strong>Estimated Due Date:</strong> ${dueDate.toDateString()}<br />
-        <strong>Weeks Pregnant:</strong> ${weeksPregnant} weeks<br />
-        <strong>Days Remaining:</strong> ${daysRemaining > 0 ? daysRemaining : "Due or overdue"} days
+      // Determine trimester
+      let trimester = "";
+      let trimesterInfo = "";
+      if (weeksPregnant < 13) {
+        trimester = "First (1-12 weeks)";
+        trimesterInfo = `
+          <strong>First Trimester Tips:</strong>
+          <ul>
+            <li>Take prenatal vitamins with folic acid</li>
+            <li>Avoid alcohol, smoking, and limit caffeine</li>
+            <li>Schedule your first prenatal visit</li>
+            <li>Watch for signs of morning sickness</li>
+          </ul>
+        `;
+      } else if (weeksPregnant < 28) {
+        trimester = "Second (13-27 weeks)";
+        trimesterInfo = `
+          <strong>Second Trimester Tips:</strong>
+          <ul>
+            <li>Consider prenatal classes</li>
+            <li>Start monitoring fetal movements</li>
+            <li>Prepare for anatomy scan (18-22 weeks)</li>
+            <li>Begin planning maternity leave</li>
+          </ul>
+        `;
+      } else {
+        trimester = "Third (28-40 weeks)";
+        trimesterInfo = `
+          <strong>Third Trimester Tips:</strong>
+          <ul>
+            <li>Prepare hospital bag</li>
+            <li>Finalize birth plan</li>
+            <li>Watch for signs of labor</li>
+            <li>Install car seat by 36 weeks</li>
+          </ul>
+        `;
+      }
+
+      // Generate milestones
+      const milestones = [
+        { week: 6, name: "First Ultrasound", desc: "Confirm pregnancy and check heartbeat" },
+        { week: 12, name: "First Trimester Ends", desc: "Risk of miscarriage decreases significantly" },
+        { week: 16, name: "Gender Reveal", desc: "Possible to determine baby's sex via ultrasound" },
+        { week: 20, name: "Anatomy Scan", desc: "Detailed ultrasound to check baby's development" },
+        { week: 24, name: "Viability Milestone", desc: "Baby has chance of survival if born early" },
+        { week: 28, name: "Third Trimester Begins", desc: "Start counting fetal movements daily" },
+        { week: 36, name: "Full Term", desc: "Baby could arrive any time now" }
+      ];
+
+      // Update UI
+      document.getElementById("resultContainer").classList.remove("hidden");
+      document.getElementById("dueDate").textContent = formatDate(dueDate);
+      document.getElementById("weeksPregnant").textContent = `${weeksPregnant} weeks`;
+      document.getElementById("daysRemaining").textContent = daysRemaining > 0 ? `${daysRemaining} days` : "Due!";
+      document.getElementById("trimester").textContent = trimester;
+      document.getElementById("progressBar").style.width = `${percentComplete}%`;
+      document.getElementById("progressLabel").textContent = `${percentComplete}% Complete`;
+      document.getElementById("trimesterInfo").innerHTML = trimesterInfo;
+
+      // Display milestones
+      const milestonesList = document.getElementById("milestonesList");
+      milestonesList.innerHTML = "";
+      milestones.forEach(milestone => {
+        const milestoneDate = new Date(lmpDate);
+        milestoneDate.setDate(lmpDate.getDate() + (milestone.week * 7));
+        
+        const milestoneEl = document.createElement("div");
+        milestoneEl.className = "milestone";
+        milestoneEl.innerHTML = `
+          <div class="milestone-date">Week ${milestone.week}<br>${formatDate(milestoneDate)}</div>
+          <div class="milestone-desc">
+            <strong>${milestone.name}</strong><br>
+            ${milestone.desc}
+          </div>
+        `;
+        milestonesList.appendChild(milestoneEl);
+      });
+
+      // Show current week info
+      const weekInfo = getWeekInfo(weeksPregnant);
+      const currentWeekCard = document.getElementById("currentWeekCard");
+      currentWeekCard.innerHTML = `
+        <h4>Week ${weeksPregnant}: ${weekInfo.title}</h4>
+        <p><strong>Baby Development:</strong> ${weekInfo.development}</p>
+        <p><strong>Baby Size:</strong> ${weekInfo.size}</p>
+        <p><strong>What to Expect:</strong> ${weekInfo.expectations}</p>
+        <p><strong>Tips:</strong> ${weekInfo.tips}</p>
       `;
     }
 
-    // Allow Enter key
-    document.getElementById("lmp").addEventListener("keypress", function (event) {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        calculateDueDate();
+    function formatDate(date) {
+      return date.toLocaleDateString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric', 
+        year: 'numeric' 
+      });
+    }
+
+    function getWeekInfo(week) {
+      const weeks = {
+        8: {
+          title: "Rapid Growth",
+          development: "Baby's arms and legs are growing, and fingers have begun to form.",
+          size: "Raspberry (1.6 cm)",
+          expectations: "You might experience morning sickness and fatigue.",
+          tips: "Stay hydrated and eat small, frequent meals."
+        },
+        12: {
+          title: "First Trimester Complete",
+          development: "Baby's nerves and muscles start working together. Can make a fist.",
+          size: "Lime (5 cm)",
+          expectations: "Nausea may start to subside. Energy levels may improve.",
+          tips: "Schedule your first trimester screening if you haven't already."
+        },
+        20: {
+          title: "Halfway There",
+          development: "Baby can swallow and is producing meconium. You may feel movement.",
+          size: "Banana (25 cm)",
+          expectations: "Time for anatomy scan ultrasound. Might feel baby's kicks.",
+          tips: "Start talking to your baby - they can hear your voice now."
+        },
+        28: {
+          title: "Third Trimester Begins",
+          development: "Baby's eyes can open and close. Developing more fat under skin.",
+          size: "Eggplant (37 cm)",
+          expectations: "Start counting kicks. Watch for signs of preterm labor.",
+          tips: "Consider prenatal classes and begin preparing your birth plan."
+        },
+        36: {
+          title: "Full Term",
+          development: "Baby is gaining about 28g per day. Lungs are nearly fully developed.",
+          size: "Honeydew melon (47 cm)",
+          expectations: "Baby may drop lower in your pelvis. Watch for labor signs.",
+          tips: "Pack your hospital bag and install the car seat."
+        }
+      };
+
+      // Find the closest week with info
+      let closestWeek = week;
+      while (!weeks[closestWeek] && closestWeek > 0) closestWeek--;
+      
+      return weeks[closestWeek] || {
+        title: "Early Pregnancy",
+        development: "Your baby is in the early stages of development with rapid cell division.",
+        size: "Small seed",
+        expectations: "Focus on healthy habits and prenatal care.",
+        tips: "Start taking prenatal vitamins and schedule your first doctor's appointment."
+      };
+    }
+
+    function copyResults() {
+      const dueDate = document.getElementById("dueDate").textContent;
+      const weeksPregnant = document.getElementById("weeksPregnant").textContent;
+      const trimester = document.getElementById("trimester").textContent;
+      
+      const textToCopy = `My Pregnancy Results from Tadaconvert:
+Due Date: ${dueDate}
+Current Progress: ${weeksPregnant} (${trimester} trimester)
+Check yours at ${window.location.href}`;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Results copied to clipboard!");
+      });
+    }
+
+    function shareResults() {
+      if (navigator.share) {
+        const dueDate = document.getElementById("dueDate").textContent;
+        const weeksPregnant = document.getElementById("weeksPregnant").textContent;
+        
+        navigator.share({
+          title: 'My Pregnancy Calculator Results',
+          text: `My due date is ${dueDate} and I'm ${weeksPregnant} pregnant - Calculated with Tadaconvert`,
+          url: window.location.href
+        }).catch(err => {
+          console.log('Error sharing:', err);
+        });
+      } else {
+        copyResults();
       }
-    });
+    }
   </script>
 </body>
 </html>

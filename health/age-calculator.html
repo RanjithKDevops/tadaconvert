@@ -2,39 +2,305 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Age Calculator - Tadaconvert</title>
+  <title>Advanced Age Calculator - Tadaconvert</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calculate your age in years with this simple online age calculator.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="Calculate your exact age with zodiac sign, generation, and shareable results.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* [Previous CSS styles remain the same] */
+
+    .additional-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .info-box {
+      padding: 15px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .share-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .share-btn {
+      padding: 8px 15px;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .share-btn:hover {
+      background: #0066cc;
+    }
+
+    .copy-btn {
+      background: #4CAF50;
+    }
+
+    .copy-btn:hover {
+      background: #45a049;
+    }
+
+    .zodiac-icon {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 <body>
-  <header><h1><a href="index.html">Tadaconvert</a></h1></header>
-  <main>
-    <div class="container">
-      <h2>Age Calculator</h2>
-      <p>Enter your birthdate:</p>
-      <input type="date" id="dob">
-      <button onclick="calculateAge()">Calculate</button>
-      <div class="result" id="result"></div>
+  <div class="age-calculator">
+    <h2 class="calculator-title">Advanced Age Calculator</h2>
+    <p class="calculator-description">Discover your exact age, zodiac sign, generation, and more</p>
+
+    <form id="ageForm">
+      <div class="input-group">
+        <label for="dob">Enter your birth date:</label>
+        <input type="date" id="dob" required>
+      </div>
+
+      <button type="submit" class="calculate-btn">Calculate Age</button>
+    </form>
+
+    <div class="result-container hidden" id="resultContainer">
+      <h3 class="result-title">Your Age Analysis</h3>
+      
+      <div class="age-result" id="ageResult"></div>
+      
+      <div class="detailed-results">
+        <div class="result-box">
+          <div class="result-value" id="yearsResult"></div>
+          <div class="result-label">Years</div>
+        </div>
+        <div class="result-box">
+          <div class="result-value" id="monthsResult"></div>
+          <div class="result-label">Months</div>
+        </div>
+        <div class="result-box">
+          <div class="result-value" id="daysResult"></div>
+          <div class="result-label">Days</div>
+        </div>
+        <div class="result-box">
+          <div class="result-value" id="weeksResult"></div>
+          <div class="result-label">Weeks</div>
+        </div>
+      </div>
+
+      <div class="additional-info">
+        <div class="info-box">
+          <div class="zodiac-icon" id="zodiacIcon">♈</div>
+          <div class="result-value" id="zodiacSign"></div>
+          <div class="result-label">Zodiac Sign</div>
+        </div>
+        <div class="info-box">
+          <div class="result-value" id="generation"></div>
+          <div class="result-label">Generation</div>
+        </div>
+        <div class="info-box">
+          <div class="result-value" id="birthstone"></div>
+          <div class="result-label">Birthstone</div>
+        </div>
+      </div>
+
+      <div class="share-buttons">
+        <button class="share-btn copy-btn" onclick="copyResults()">
+          <span>📋</span> Copy Results
+        </button>
+        <button class="share-btn" onclick="shareResults()">
+          <span>📤</span> Share
+        </button>
+      </div>
     </div>
-  </main>
-  <footer><p>&copy; 2025 Tadaconvert · Free Online Tools</p></footer>
+
+    <div class="milestones hidden" id="milestones">
+      <h3 class="result-title">Your Life Milestones</h3>
+      <div id="milestonesList"></div>
+    </div>
+  </div>
+
   <script>
+    document.getElementById("ageForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      calculateAge();
+    });
+
     function calculateAge() {
-      const dob = new Date(document.getElementById('dob').value);
-      if (isNaN(dob)) {
-        document.getElementById('result').innerText = "Enter a valid date";
+      const dobInput = document.getElementById("dob").value;
+      if (!dobInput) {
+        alert("Please enter your birth date");
         return;
       }
-      const today = new Date();
-      let age = today.getFullYear() - dob.getFullYear();
-      const m = today.getMonth() - dob.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-        age--;
+
+      const dob = new Date(dobInput);
+      const toDate = new Date();
+
+      if (isNaN(dob.getTime())) {
+        alert("Enter a valid birth date");
+        return;
       }
-      document.getElementById('result').innerText = `You are ${age} years old`;
+
+      if (dob > toDate) {
+        alert("Birth date cannot be in the future");
+        return;
+      }
+
+      // Calculate age breakdown
+      let years = toDate.getFullYear() - dob.getFullYear();
+      let months = toDate.getMonth() - dob.getMonth();
+      let days = toDate.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        const prevMonth = new Date(toDate.getFullYear(), toDate.getMonth(), 0);
+        days += prevMonth.getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      // Calculate total days and weeks
+      const diffTime = Math.abs(toDate - dob);
+      const totalDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      const totalWeeks = Math.floor(totalDays / 7);
+      const remainingDays = totalDays % 7;
+
+      // Update results
+      document.getElementById("resultContainer").classList.remove("hidden");
+      document.getElementById("milestones").classList.remove("hidden");
+      
+      document.getElementById("ageResult").textContent = `You are ${years} years, ${months} months, and ${days} days old`;
+      document.getElementById("yearsResult").textContent = years;
+      document.getElementById("monthsResult").textContent = (years * 12) + months;
+      document.getElementById("daysResult").textContent = totalDays;
+      document.getElementById("weeksResult").textContent = `${totalWeeks}w ${remainingDays}d`;
+
+      // Calculate additional info
+      calculateZodiac(dob);
+      calculateGeneration(dob.getFullYear());
+      calculateBirthstone(dob.getMonth());
+      
+      // Generate milestones
+      generateMilestones(dob, toDate);
     }
+
+    function calculateZodiac(birthDate) {
+      const month = birthDate.getMonth() + 1;
+      const day = birthDate.getDate();
+      let zodiac = "";
+      let zodiacIcon = "";
+
+      if ((month == 1 && day >= 20) || (month == 2 && day <= 18)) {
+        zodiac = "Aquarius ♒"; zodiacIcon = "♒";
+      } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+        zodiac = "Pisces ♓"; zodiacIcon = "♓";
+      } else if ((month == 3 && day >= 21) || (month == 4 && day <= 19)) {
+        zodiac = "Aries ♈"; zodiacIcon = "♈";
+      } else if ((month == 4 && day >= 20) || (month == 5 && day <= 20)) {
+        zodiac = "Taurus ♉"; zodiacIcon = "♉";
+      } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+        zodiac = "Gemini ♊"; zodiacIcon = "♊";
+      } else if ((month == 6 && day >= 21) || (month == 7 && day <= 22)) {
+        zodiac = "Cancer ♋"; zodiacIcon = "♋";
+      } else if ((month == 7 && day >= 23) || (month == 8 && day <= 22)) {
+        zodiac = "Leo ♌"; zodiacIcon = "♌";
+      } else if ((month == 8 && day >= 23) || (month == 9 && day <= 22)) {
+        zodiac = "Virgo ♍"; zodiacIcon = "♍";
+      } else if ((month == 9 && day >= 23) || (month == 10 && day <= 22)) {
+        zodiac = "Libra ♎"; zodiacIcon = "♎";
+      } else if ((month == 10 && day >= 23) || (month == 11 && day <= 21)) {
+        zodiac = "Scorpio ♏"; zodiacIcon = "♏";
+      } else if ((month == 11 && day >= 22) || (month == 12 && day <= 21)) {
+        zodiac = "Sagittarius ♐"; zodiacIcon = "♐";
+      } else if ((month == 12 && day >= 22) || (month == 1 && day <= 19)) {
+        zodiac = "Capricorn ♑"; zodiacIcon = "♑";
+      }
+
+      document.getElementById("zodiacSign").textContent = zodiac;
+      document.getElementById("zodiacIcon").textContent = zodiacIcon;
+    }
+
+    function calculateGeneration(birthYear) {
+      let generation = "";
+      
+      if (birthYear >= 2013) {
+        generation = "Gen Alpha";
+      } else if (birthYear >= 1997) {
+        generation = "Gen Z";
+      } else if (birthYear >= 1981) {
+        generation = "Millennial";
+      } else if (birthYear >= 1965) {
+        generation = "Gen X";
+      } else if (birthYear >= 1946) {
+        generation = "Boomer";
+      } else if (birthYear >= 1928) {
+        generation = "Silent Generation";
+      } else {
+        generation = "Greatest Generation";
+      }
+
+      document.getElementById("generation").textContent = generation;
+    }
+
+    function calculateBirthstone(month) {
+      const stones = [
+        "Garnet", "Amethyst", "Aquamarine", "Diamond", 
+        "Emerald", "Pearl", "Ruby", "Peridot", 
+        "Sapphire", "Opal", "Topaz", "Turquoise"
+      ];
+      document.getElementById("birthstone").textContent = stones[month];
+    }
+
+    function copyResults() {
+      const resultText = document.getElementById("ageResult").textContent;
+      const zodiac = document.getElementById("zodiacSign").textContent;
+      const generation = document.getElementById("generation").textContent;
+      
+      const textToCopy = `My Age Results from Tadaconvert:
+${resultText}
+Zodiac Sign: ${zodiac}
+Generation: ${generation}
+Check yours at ${window.location.href}`;
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        alert("Results copied to clipboard!");
+      });
+    }
+
+    function shareResults() {
+      if (navigator.share) {
+        const resultText = document.getElementById("ageResult").textContent;
+        
+        navigator.share({
+          title: 'My Age Results',
+          text: `${resultText} - Calculated with Tadaconvert`,
+          url: window.location.href
+        }).catch(err => {
+          console.log('Error sharing:', err);
+        });
+      } else {
+        // Fallback for browsers that don't support Web Share API
+        copyResults();
+        alert("Results copied to clipboard! You can now paste them anywhere.");
+      }
+    }
+
+    /* [Previous generateMilestones function remains the same] */
   </script>
 </body>
 </html>
