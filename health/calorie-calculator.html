@@ -4,11 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Calorie Calculator - Tadaconvert</title>
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script>
+  
   <link rel="stylesheet" href="../css/style.css" />
   <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f8fc;
+    }
+    
+    .ad-container {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
     .calorie-calculator {
       max-width: 500px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 25px;
       background: white;
       border-radius: 10px;
@@ -90,9 +111,28 @@
     .hidden {
       display: none;
     }
+    
+    @media (max-width: 600px) {
+      .calorie-calculator {
+        padding: 15px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Top Banner Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_CALORIE_TOP_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <div class="calorie-calculator">
     <h1 class="calculator-title">Calorie Calculator</h1>
 
@@ -141,6 +181,19 @@
       <button type="submit" class="calculate-btn">Calculate Calories</button>
     </form>
 
+    <!-- Mid-Page Ad (Appears after calculation) -->
+    <div class="ad-container" id="midPageAd" style="display: none;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_PUB_ID"
+           data-ad-slot="YOUR_CALORIE_MID_SLOT"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
     <div class="result-container hidden" id="resultContainer">
       <h3 class="result-title">Your Calorie Needs</h3>
       
@@ -151,7 +204,25 @@
     </div>
   </div>
 
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_CALORIE_BOTTOM_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <script>
+    // Initialize ads
+    document.addEventListener('DOMContentLoaded', function() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+
     // Form submission handler
     document.getElementById("calorieForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -220,11 +291,15 @@
 
       // Display results
       document.getElementById("resultContainer").classList.remove("hidden");
+      document.getElementById("midPageAd").style.display = "block"; // Show mid-page ad
       document.getElementById("maintenanceCalories").innerHTML = 
         `<strong>Maintenance:</strong> ${maintenanceCalories} kcal/day`;
       document.getElementById("weightLossCalories").innerHTML = 
         `<strong>Weight Loss:</strong> ${loseHalfKg} kcal/day (0.5kg/week) | ${loseOneKg} kcal/day (1kg/week)`;
       document.getElementById("timeEstimate").innerHTML = timeMessage;
+      
+      // Load mid-page ad after calculation
+      (adsbygoogle = window.adsbygoogle || []).push({});
     }
   </script>
 </body>

@@ -5,10 +5,145 @@
   <title>Advanced Age Calculator - Tadaconvert</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Calculate your exact age with zodiac sign, generation, and shareable results.">
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script>
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    /* [Previous CSS styles remain the same] */
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f8fc;
+      color: #333;
+    }
+    
+    .ad-container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .age-calculator {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 25px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .calculator-title {
+      text-align: center;
+      color: #004080;
+      margin-bottom: 5px;
+      font-size: 1.8rem;
+    }
+
+    .calculator-description {
+      text-align: center;
+      color: #666;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: border 0.3s;
+    }
+
+    .input-group input:focus {
+      border-color: #004080;
+      outline: none;
+    }
+
+    .calculate-btn {
+      width: 100%;
+      padding: 12px;
+      background: #004080;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .calculate-btn:hover {
+      background: #0066cc;
+    }
+
+    .result-container {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .result-title {
+      color: #004080;
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .age-result {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .detailed-results {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .result-box {
+      padding: 15px;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      text-align: center;
+    }
+
+    .result-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #004080;
+      margin-bottom: 5px;
+    }
+
+    .result-label {
+      font-size: 0.9rem;
+      color: #666;
+    }
 
     .additional-info {
       display: grid;
@@ -42,6 +177,7 @@
       display: flex;
       align-items: center;
       gap: 5px;
+      font-size: 0.9rem;
     }
 
     .share-btn:hover {
@@ -60,9 +196,54 @@
       font-size: 24px;
       margin-bottom: 5px;
     }
+
+    .milestones {
+      margin-top: 30px;
+      padding: 20px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .milestone-item {
+      padding: 10px;
+      border-left: 3px solid #004080;
+      margin-bottom: 10px;
+      background: white;
+    }
+
+    @media (max-width: 600px) {
+      .detailed-results {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .additional-info {
+        grid-template-columns: 1fr;
+      }
+      
+      .share-buttons {
+        flex-direction: column;
+      }
+      
+      .share-btn {
+        justify-content: center;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Top Banner Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_AGE_TOP_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <div class="age-calculator">
     <h2 class="calculator-title">Advanced Age Calculator</h2>
     <p class="calculator-description">Discover your exact age, zodiac sign, generation, and more</p>
@@ -75,6 +256,19 @@
 
       <button type="submit" class="calculate-btn">Calculate Age</button>
     </form>
+
+    <!-- Mid-Page Ad (Appears after calculation) -->
+    <div class="ad-container" id="midPageAd" style="display: none;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_PUB_ID"
+           data-ad-slot="YOUR_AGE_MID_SLOT"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
 
     <div class="result-container hidden" id="resultContainer">
       <h3 class="result-title">Your Age Analysis</h3>
@@ -132,7 +326,25 @@
     </div>
   </div>
 
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_AGE_BOTTOM_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <script>
+    // Initialize ads
+    document.addEventListener('DOMContentLoaded', function() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+
     document.getElementById("ageForm").addEventListener("submit", function(e) {
       e.preventDefault();
       calculateAge();
@@ -183,6 +395,7 @@
       // Update results
       document.getElementById("resultContainer").classList.remove("hidden");
       document.getElementById("milestones").classList.remove("hidden");
+      document.getElementById("midPageAd").style.display = "block"; // Show mid-page ad
       
       document.getElementById("ageResult").textContent = `You are ${years} years, ${months} months, and ${days} days old`;
       document.getElementById("yearsResult").textContent = years;
@@ -197,6 +410,9 @@
       
       // Generate milestones
       generateMilestones(dob, toDate);
+      
+      // Load mid-page ad after calculation
+      (adsbygoogle = window.adsbygoogle || []).push({});
     }
 
     function calculateZodiac(birthDate) {
@@ -266,6 +482,46 @@
       document.getElementById("birthstone").textContent = stones[month];
     }
 
+    function generateMilestones(birthDate, currentDate) {
+      const milestonesList = document.getElementById("milestonesList");
+      milestonesList.innerHTML = "";
+      
+      const milestones = [
+        { age: 0, text: "You were born!" },
+        { age: 1, text: "First birthday" },
+        { age: 5, text: "Started school" },
+        { age: 13, text: "Became a teenager" },
+        { age: 16, text: "Sweet sixteen" },
+        { age: 18, text: "Became an adult" },
+        { age: 21, text: "Legal drinking age (in most countries)" },
+        { age: 30, text: "Welcome to your 30s" },
+        { age: 40, text: "The fabulous 40s" },
+        { age: 50, text: "Half a century!" },
+        { age: 65, text: "Traditional retirement age" },
+        { age: 100, text: "Centenarian!" }
+      ];
+      
+      const currentAge = currentDate.getFullYear() - birthDate.getFullYear();
+      
+      milestones.forEach(milestone => {
+        const milestoneDate = new Date(birthDate);
+        milestoneDate.setFullYear(birthDate.getFullYear() + milestone.age);
+        
+        if (milestoneDate <= currentDate) {
+          const item = document.createElement("div");
+          item.className = "milestone-item";
+          item.innerHTML = `<strong>Age ${milestone.age}:</strong> ${milestone.text} (${milestoneDate.toLocaleDateString()})`;
+          milestonesList.appendChild(item);
+        } else {
+          const item = document.createElement("div");
+          item.className = "milestone-item";
+          const yearsLeft = milestone.age - currentAge;
+          item.innerHTML = `<strong>Coming in ${yearsLeft} year${yearsLeft !== 1 ? 's' : ''}:</strong> ${milestone.text} (around ${milestoneDate.toLocaleDateString()})`;
+          milestonesList.appendChild(item);
+        }
+      });
+    }
+
     function copyResults() {
       const resultText = document.getElementById("ageResult").textContent;
       const zodiac = document.getElementById("zodiacSign").textContent;
@@ -299,8 +555,6 @@ Check yours at ${window.location.href}`;
         alert("Results copied to clipboard! You can now paste them anywhere.");
       }
     }
-
-    /* [Previous generateMilestones function remains the same] */
   </script>
 </body>
 </html>

@@ -5,10 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BMI Calculator - Tadaconvert</title>
   <link rel="stylesheet" href="../css/style.css" />
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script>
+  
   <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f8fc;
+    }
+    
+    .ad-container {
+      max-width: 600px;
+      margin: 20px auto;
+      text-align: center;
+      padding: 10px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
     .bmi-calculator {
       max-width: 500px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 25px;
       background: white;
       border-radius: 10px;
@@ -151,9 +172,29 @@
     .hidden {
       display: none;
     }
+    
+    /* Responsive ads */
+    @media (max-width: 600px) {
+      .ad-container {
+        padding: 5px;
+      }
+    }
   </style>
 </head>
 <body>
+  <!-- Top Ad Banner -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_BMI_TOP_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <div class="bmi-calculator">
     <h1 class="bmi-title">BMI Calculator</h1>
 
@@ -170,6 +211,19 @@
 
       <button type="submit" class="calculate-btn">Calculate BMI</button>
     </form>
+
+    <!-- Mid-Page Ad (Appears after calculation) -->
+    <div class="ad-container" id="midPageAd" style="display: none;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_PUB_ID"
+           data-ad-slot="YOUR_BMI_MID_SLOT"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
 
     <div class="visual-feedback hidden" id="visualFeedback">
       <div class="bmi-indicator" id="bmiIndicator">BMI: --</div>
@@ -197,7 +251,25 @@
     </div>
   </div>
 
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_BMI_BOTTOM_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <script>
+    // Initialize ads
+    document.addEventListener('DOMContentLoaded', function() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+
     document.getElementById('bmiForm').addEventListener('submit', function(event) {
       event.preventDefault();
       calculateBMI();
@@ -209,7 +281,6 @@
       const height = parseFloat(heightInput.value);
       const weight = parseFloat(weightInput.value);
 
-      // Validate inputs
       if (!height || !weight || height <= 0 || weight <= 0) {
         alert("Please enter valid height and weight values");
         return;
@@ -260,6 +331,7 @@
       // Update UI
       document.getElementById("visualFeedback").classList.remove("hidden");
       document.getElementById("resultContainer").classList.remove("hidden");
+      document.getElementById("midPageAd").style.display = "block"; // Show mid-page ad
       
       document.getElementById("bmiValue").textContent = bmi;
       document.getElementById("bmiCategory").textContent = category;
@@ -282,6 +354,9 @@
       const indicator = document.getElementById("bmiIndicator");
       indicator.textContent = `BMI: ${bmi}`;
       indicator.style.left = `${indicatorPosition}%`;
+      
+      // Load mid-page ad after calculation
+      (adsbygoogle = window.adsbygoogle || []).push({});
     }
   </script>
 </body>

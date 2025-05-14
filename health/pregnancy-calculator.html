@@ -4,11 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Advanced Pregnancy Calculator - Tadaconvert</title>
+  
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUB_ID" crossorigin="anonymous"></script>
+  
   <link rel="stylesheet" href="../css/style.css" />
   <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f8fc;
+    }
+    
+    .ad-container {
+      max-width: 700px;
+      margin: 20px auto;
+      padding: 15px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
     .pregnancy-calculator {
       max-width: 700px;
-      margin: 0 auto;
+      margin: 20px auto;
       padding: 30px;
       background: white;
       border-radius: 10px;
@@ -224,10 +245,26 @@
       .pregnancy-summary {
         grid-template-columns: 1fr 1fr;
       }
+      .ad-container {
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Top Banner Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_PREGNANCY_TOP_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <div class="pregnancy-calculator">
     <h1 class="calculator-title">Pregnancy Calculator</h1>
     <p class="calculator-subtitle">Track your pregnancy journey with detailed milestones and weekly updates</p>
@@ -250,6 +287,19 @@
 
       <button type="submit" class="calculate-btn">Calculate Pregnancy Details</button>
     </form>
+
+    <!-- Mid-Page Ad (Appears after calculation) -->
+    <div class="ad-container" id="midPageAd" style="display: none;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-YOUR_PUB_ID"
+           data-ad-slot="YOUR_PREGNANCY_MID_SLOT"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
 
     <div class="result-container hidden" id="resultContainer">
       <h3 class="result-title">Your Pregnancy Timeline</h3>
@@ -301,7 +351,25 @@
     </div>
   </div>
 
+  <!-- Bottom Ad -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-YOUR_PUB_ID"
+         data-ad-slot="YOUR_PREGNANCY_BOTTOM_SLOT"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
   <script>
+    // Initialize ads
+    document.addEventListener('DOMContentLoaded', function() {
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    });
+
     document.getElementById("pregnancyForm").addEventListener("submit", function(e) {
       e.preventDefault();
       calculatePregnancy();
@@ -387,6 +455,7 @@
 
       // Update UI
       document.getElementById("resultContainer").classList.remove("hidden");
+      document.getElementById("midPageAd").style.display = "block"; // Show mid-page ad
       document.getElementById("dueDate").textContent = formatDate(dueDate);
       document.getElementById("weeksPregnant").textContent = `${weeksPregnant} weeks`;
       document.getElementById("daysRemaining").textContent = daysRemaining > 0 ? `${daysRemaining} days` : "Due!";
@@ -424,6 +493,9 @@
         <p><strong>What to Expect:</strong> ${weekInfo.expectations}</p>
         <p><strong>Tips:</strong> ${weekInfo.tips}</p>
       `;
+      
+      // Load mid-page ad after calculation
+      (adsbygoogle = window.adsbygoogle || []).push({});
     }
 
     function formatDate(date) {
