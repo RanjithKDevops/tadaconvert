@@ -4,10 +4,29 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Free online calculators and converters for health, fitness, and unit conversions. Calculate BMI, age, calories, and convert units like Celsius to Fahrenheit.">
+  <meta name="keywords" content="online calculator, unit converter, BMI calculator, age calculator, calorie calculator, temperature converter">
+  
+  <!-- Canonical URL (SEO) -->
+  <link rel="canonical" href="https://www.tadaconvert.com/" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  
+  <!-- Open Graph / Social Meta -->
+  <meta property="og:title" content="Tadaconvert - Free Online Calculators and Converters">
+  <meta property="og:description" content="Your simple, fast and reliable online tool hub">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.tadaconvert.com/">
+  <meta property="og:image" content="https://www.tadaconvert.com/images/og-image.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tadaconvert - Free Online Calculators">
+  <meta name="twitter:description" content="Instant calculators and converters">
+  <meta name="twitter:image" content="https://www.tadaconvert.com/images/twitter-image.jpg">
   
   <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685"
-     crossorigin="anonymous"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
   
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -28,43 +47,214 @@
   <link rel="stylesheet" href="css/style.css" />
   
   <style>
-    /* Existing styles... */
+    :root {
+      --primary-color: #004080;
+      --secondary-color: #f4f8fc;
+      --accent-color: #ff6b00;
+    }
+    
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--secondary-color);
+      line-height: 1.6;
+      color: #333;
+    }
+
+    header {
+      background: var(--primary-color);
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: relative;
+    }
+
+    .header-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin: 0.5rem 0 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .section-title {
+      margin: 2rem 0 1rem;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      font-weight: 600;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--primary-color);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tool-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .tool-card a {
+      display: block;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: var(--primary-color);
+      height: 100%;
+    }
+
+    .tool-card h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .tool-card p {
+      margin: 0;
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* Search box */
+    .search-container {
+      margin: 2rem auto;
+      max-width: 600px;
+      position: relative;
+    }
+    
+    #search {
+      width: 100%;
+      padding: 12px 20px;
+      border: 2px solid #ddd;
+      border-radius: 30px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      padding-left: 45px;
+      background: white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>') no-repeat 15px center;
+    }
+
+    #search:focus {
+      border-color: var(--primary-color);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0,64,128,0.1);
+    }
+    
+    /* Ad containers */
+    .ad-container {
+      margin: 2.5rem auto;
+      text-align: center;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
     .sticky-ad {
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 100;
       background: white;
-      padding: 10px 0;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 0.5rem 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--primary-color);
+      color: white;
+      margin-top: 3rem;
+      font-size: 0.95rem;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 1.8rem;
+      }
+      
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .ad-container {
+        margin: 1.5rem auto;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Sticky Top Banner Ad -->
+  <!-- Sticky Top Ad -->
   <div class="sticky-ad">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-5699527971423685"
-         data-ad-slot="2605992743"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-
-  <header>
-    <h1>Tadaconvert</h1>
-    <p>Your simple, fast and reliable online tool hub</p>
-  </header>
-
-  <div class="container">
-    <!-- Top Content Ad (Leaderboard) -->
     <div class="ad-container">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-5699527971423685"
-           data-ad-slot="2605992743" <!-- Same or different slot -->
+           data-ad-slot="2605992743"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-content">
+      <h1>Tadaconvert</h1>
+      <p>Your simple, fast and reliable online tool hub</p>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Search Box -->
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search all calculators..." onkeyup="searchTools()">
+    </div>
+
+    <!-- Main Content Ad -->
+    <div class="ad-container">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-5699527971423685"
+           data-ad-slot="2605992743"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>
@@ -72,25 +262,42 @@
       </script>
     </div>
 
-    <!-- Search Box -->
-    <div class="search-container">
-      <input type="text" id="search" placeholder="🔍 Search calculators..." onkeyup="searchTools()">
-    </div>
-
     <div class="section">
-      <h2 class="section-title">Health & Fitness</h2>
-      <ul class="tool-list">
-        <li><a href="health/bmi-calculator.html">BMI Calculator</a></li>
-        <li><a href="health/age-calculator.html">Age Calculator</a></li>
+      <h2 class="section-title">Health & Fitness Calculators</h2>
+      <ul class="tool-grid">
+        <li class="tool-card">
+          <a href="health/bmi-calculator.html">
+            <h3>BMI Calculator</h3>
+            <p>Calculate your Body Mass Index</p>
+          </a>
+        </li>
+        <li class="tool-card">
+          <a href="health/age-calculator.html">
+            <h3>Age Calculator</h3>
+            <p>Find your exact age in years/months/days</p>
+          </a>
+        </li>
+        <li class="tool-card">
+          <a href="health/calorie-calculator.html">
+            <h3>Calorie Calculator</h3>
+            <p>Estimate your daily calorie needs</p>
+          </a>
+        </li>
+        <li class="tool-card">
+          <a href="health/pregnancy-calculator.html">
+            <h3>Pregnancy Calculator</h3>
+            <p>Track pregnancy milestones</p>
+          </a>
+        </li>
       </ul>
     </div>
 
-    <!-- Mid-Page Ad (Rectangle) -->
+    <!-- Mid-Page Ad -->
     <div class="ad-container">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-5699527971423685"
-           data-ad-slot="2605992743" <!-- Same or different slot -->
+           data-ad-slot="2605992743"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
       <script>
@@ -100,40 +307,53 @@
 
     <div class="section">
       <h2 class="section-title">Unit Converters</h2>
-      <ul class="tool-list">
-        <li><a href="converters/temperature/celsius-to-fahrenheit.html">Celsius to Fahrenheit</a></li>
+      <ul class="tool-grid">
+        <li class="tool-card">
+          <a href="converters/temperature/celsius-to-fahrenheit.html">
+            <h3>Temperature Converter</h3>
+            <p>Celsius ⇄ Fahrenheit</p>
+          </a>
+        </li>
+        <li class="tool-card">
+          <a href="converters/length/cm-to-inches.html">
+            <h3>Length Converter</h3>
+            <p>Centimeters ⇄ Inches</p>
+          </a>
+        </li>
+        <li class="tool-card">
+          <a href="converters/weight/kg-to-pounds.html">
+            <h3>Weight Converter</h3>
+            <p>Kilograms ⇄ Pounds</p>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 
-  <!-- Sticky Bottom Ad (Anchor) -->
-  <div class="sticky-ad" style="top: auto; bottom: 0;">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-5699527971423685"
-         data-ad-slot="2605992743"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-
   <footer>
-    &copy; 2025 Tadaconvert.com | All Rights Reserved
+    <div class="footer-content">
+      &copy; <span id="year"></span> Tadaconvert.com | All Rights Reserved
+      <p style="margin-top: 0.5rem; font-size: 0.85rem; opacity: 0.8;">
+        Free online calculators and conversion tools
+      </p>
+    </div>
   </footer>
 
   <script>
-    // Initialize ads
-    (adsbygoogle = window.adsbygoogle || []).push({});
+    // Auto-update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
     
-    // Search function
+    // Search functionality
     function searchTools() {
-      const input = document.getElementById('search').value.toLowerCase();
-      document.querySelectorAll('.tool-list li').forEach(item => {
-        item.style.display = item.textContent.toLowerCase().includes(input) ? 'block' : 'none';
+      const searchTerm = document.getElementById('search').value.toLowerCase();
+      document.querySelectorAll('.tool-card').forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(searchTerm) ? 'block' : 'none';
       });
     }
+    
+    // Initialize ads
+    (adsbygoogle = window.adsbygoogle || []).push({});
   </script>
 </body>
 </html>
