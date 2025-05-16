@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pace Calculator | TadaConvert</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="icon" href="../images/favicon.ico">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header same as previous calculators -->
+    
+    <main class="container calculator-container">
+        <h1>Pace Calculator</h1>
+        <p>Calculate your running pace per kilometer or mile.</p>
+        
+        <div class="calculator-form">
+            <div class="input-group">
+                <label for="distance">Distance:</label>
+                <input type="number" id="distance" min="1" max="100" step="0.1" placeholder="Distance">
+                <select id="distance-unit">
+                    <option value="km">Kilometers</option>
+                    <option value="mi">Miles</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label for="time">Time:</label>
+                <div class="time-inputs">
+                    <input type="number" id="hours" min="0" max="24" placeholder="Hours">
+                    <span>:</span>
+                    <input type="number" id="minutes" min="0" max="59" placeholder="Minutes">
+                    <span>:</span>
+                    <input type="number" id="seconds" min="0" max="59" placeholder="Seconds">
+                </div>
+            </div>
+            
+            <button onclick="calculatePace()" class="btn">Calculate Pace</button>
+            
+            <div id="result" class="result"></div>
+            
+            <div class="pace-info">
+                <h3>Common Pace Conversions:</h3>
+                <table>
+                    <tr>
+                        <th>Pace (min/km)</th>
+                        <th>Speed (km/h)</th>
+                        <th>Pace (min/mi)</th>
+                        <th>Speed (mph)</th>
+                    </tr>
+                    <tr>
+                        <td>4:00</td>
+                        <td>15.0</td>
+                        <td>6:26</td>
+                        <td>9.3</td>
+                    </tr>
+                    <tr>
+                        <td>5:00</td>
+                        <td>12.0</td>
+                        <td>8:03</td>
+                        <td>7.5</td>
+                    </tr>
+                    <tr>
+                        <td>6:00</td>
+                        <td>10.0</td>
+                        <td>9:39</td>
+                        <td>6.2</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer same as previous calculators -->
+    
+    <script src="../js/pace.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

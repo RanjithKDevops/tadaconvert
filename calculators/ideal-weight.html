@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ideal Weight Calculator | TadaConvert</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="icon" href="../images/favicon.ico">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header same as previous calculators -->
+    
+    <main class="container calculator-container">
+        <h1>Ideal Weight Calculator</h1>
+        <p>Calculate your healthy weight range based on height and gender.</p>
+        
+        <div class="calculator-form">
+            <div class="input-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input type="radio" id="iw-male" name="iw-gender" value="male" checked>
+                    <label for="iw-male">Male</label>
+                    <input type="radio" id="iw-female" name="iw-gender" value="female">
+                    <label for="iw-female">Female</label>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="height-iw">Height (cm):</label>
+                <input type="number" id="height-iw" min="100" max="250" placeholder="Your height">
+            </div>
+            
+            <button onclick="calculateIdealWeight()" class="btn">Calculate Ideal Weight</button>
+            
+            <div id="result" class="result"></div>
+            
+            <div class="ideal-weight-info">
+                <h3>About Ideal Weight:</h3>
+                <p>Ideal weight is calculated using the Devine formula and represents a healthy weight range for your height.</p>
+                <p>Note that these are estimates and individual factors like muscle mass and body composition can affect your ideal weight.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer same as previous calculators -->
+    
+    <script src="../js/ideal-weight.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

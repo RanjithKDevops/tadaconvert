@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMR Calculator | TadaConvert</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="icon" href="../images/favicon.ico">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Header same as previous calculators -->
+    
+    <main class="container calculator-container">
+        <h1>BMR Calculator</h1>
+        <p>Calculate your Basal Metabolic Rate (calories your body needs at rest).</p>
+        
+        <div class="calculator-form">
+            <div class="input-group">
+                <label for="bmr-age">Age:</label>
+                <input type="number" id="bmr-age" min="15" max="120" placeholder="Your age">
+            </div>
+            
+            <div class="input-group">
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input type="radio" id="bmr-male" name="bmr-gender" value="male" checked>
+                    <label for="bmr-male">Male</label>
+                    <input type="radio" id="bmr-female" name="bmr-gender" value="female">
+                    <label for="bmr-female">Female</label>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label for="bmr-weight">Weight (kg):</label>
+                <input type="number" id="bmr-weight" min="30" max="300" step="0.1" placeholder="Your weight">
+            </div>
+            
+            <div class="input-group">
+                <label for="bmr-height">Height (cm):</label>
+                <input type="number" id="bmr-height" min="100" max="250" placeholder="Your height">
+            </div>
+            
+            <button onclick="calculateBMR()" class="btn">Calculate BMR</button>
+            
+            <div id="result" class="result"></div>
+            
+            <div class="bmr-info">
+                <h3>About BMR:</h3>
+                <p>Your Basal Metabolic Rate (BMR) is the number of calories you'd burn if you stayed in bed all day. This is your body's "idle" calorie burn rate.</p>
+                <p>To calculate your total daily calorie needs, multiply your BMR by your activity level factor:</p>
+                <ul>
+                    <li>Sedentary (little or no exercise): BMR × 1.2</li>
+                    <li>Lightly active (light exercise 1-3 days/week): BMR × 1.375</li>
+                    <li>Moderately active (moderate exercise 3-5 days/week): BMR × 1.55</li>
+                    <li>Very active (hard exercise 6-7 days/week): BMR × 1.725</li>
+                    <li>Extra active (very hard exercise & physical job): BMR × 1.9</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer same as previous calculators -->
+    
+    <script src="../js/bmr.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>

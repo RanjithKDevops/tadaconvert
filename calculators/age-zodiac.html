@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age & Zodiac Calculator | TadaConvert</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/calculator.css">
+    <link rel="icon" href="../images/favicon.ico">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+    <style>
+        .zodiac-details {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .zodiac-symbol {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .zodiac-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .trait-pill {
+            background-color: #e0e6ff;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>TadaConvert</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                    <li><a href="../policies/terms.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container calculator-container">
+        <h1>Age & Zodiac Calculator</h1>
+        <p>Calculate your exact age and discover detailed information about your zodiac sign</p>
+        
+        <div class="calculator-form">
+            <div class="input-group">
+                <label for="birthdate">Birth Date:</label>
+                <input type="date" id="birthdate" max="">
+            </div>
+            
+            <div class="input-group">
+                <label for="compare-date">Compare Date (optional):</label>
+                <input type="date" id="compare-date" max="">
+            </div>
+            
+            <button onclick="calculateAge()" class="btn">Calculate Age & Zodiac</button>
+            
+            <div id="result" class="result"></div>
+            
+            <div id="zodiac-info" class="zodiac-details" style="display: none;">
+                <div class="zodiac-header">
+                    <div class="zodiac-symbol" id="zodiac-symbol"></div>
+                    <h3>Your Zodiac Sign: <span id="zodiac-sign"></span></h3>
+                    <p><strong>Date Range:</strong> <span id="zodiac-dates"></span></p>
+                    <p><strong>Element:</strong> <span id="zodiac-element"></span></p>
+                    <p><strong>Ruling Planet:</strong> <span id="zodiac-planet"></span></p>
+                </div>
+                <div id="zodiac-description"></div>
+                <div class="zodiac-traits" id="zodiac-traits"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> TadaConvert. All rights reserved.</p>
+            <ul>
+                <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                <li><a href="../policies/terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="../js/age-zodiac.js"></script>
+    <script src="../js/main.js"></script>
+</body>
+</html>
