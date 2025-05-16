@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tadaconvert.com/sitemap.xml
