@@ -3,18 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Body Fat Calculator | TadaConvert</title>
+    <title>Body Fat Calculator: Measure Your Body Fat Percentage | TadaConvert</title>
+    <meta name="description" content="Calculate your body fat percentage using the U.S. Navy method. Get accurate measurements for men and women with our free online body fat calculator.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calculator.css">
     <link rel="icon" href="../images/favicon.ico">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Body Fat Percentage Calculator",
+        "url": "https://tadaconvert.com/calculators/body-fat.html",
+        "description": "Calculate body fat percentage using U.S. Navy method",
+        "applicationCategory": "HealthApplication"
+    }
+    </script>
+    <style>
+        .bodyfat-chart {
+            margin-top: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .bodyfat-chart table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .bodyfat-chart th, .bodyfat-chart td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .bodyfat-chart th {
+            background-color: #e9ecef;
+        }
+        .measurement-guide {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9f7fe;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header same as previous calculators -->
-    
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>TadaConvert</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                    <li><a href="../policies/terms.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main class="container calculator-container">
-        <h1>Body Fat Calculator</h1>
-        <p>Estimate your body fat percentage using the U.S. Navy method.</p>
+        <h1><i class="fas fa-percentage"></i> Body Fat Calculator</h1>
+        <p class="intro-text">Calculate your <strong>body fat percentage</strong> using the U.S. Navy method - one of the most accurate ways to estimate body composition without specialized equipment.</p>
         
         <div class="calculator-form">
             <div class="input-group">
@@ -29,25 +79,35 @@
             
             <div class="input-group">
                 <label for="neck">Neck circumference (cm):</label>
-                <input type="number" id="neck" min="20" max="60" step="0.1" placeholder="Neck measurement">
+                <input type="number" id="neck" min="20" max="60" step="0.1" placeholder="Measure at narrowest point">
             </div>
             
             <div class="input-group">
                 <label for="waist">Waist circumference (cm):</label>
-                <input type="number" id="waist" min="50" max="200" step="0.1" placeholder="Waist measurement">
+                <input type="number" id="waist" min="50" max="200" step="0.1" placeholder="Measure at navel level">
             </div>
             
             <div class="input-group" id="hip-input" style="display: none;">
                 <label for="hips">Hip circumference (cm):</label>
-                <input type="number" id="hips" min="60" max="200" step="0.1" placeholder="Hip measurement">
+                <input type="number" id="hips" min="60" max="200" step="0.1" placeholder="Measure at widest point">
             </div>
             
-            <button onclick="calculateBodyFat()" class="btn">Calculate Body Fat</button>
+            <button onclick="calculateBodyFat()" class="btn">Calculate Body Fat %</button>
             
             <div id="result" class="result"></div>
             
+            <div class="measurement-guide">
+                <h3><i class="fas fa-ruler-combined"></i> How to Measure Correctly:</h3>
+                <ul>
+                    <li><strong>Neck:</strong> Measure at the narrowest point (below Adam's apple for men)</li>
+                    <li><strong>Waist:</strong> Measure at navel level while standing relaxed</li>
+                    <li><strong>Hips (women only):</strong> Measure at the widest point</li>
+                    <li>Use a flexible tape measure and keep it parallel to the floor</li>
+                </ul>
+            </div>
+            
             <div class="bodyfat-chart">
-                <h3>Body Fat Categories:</h3>
+                <h3><i class="fas fa-chart-pie"></i> Body Fat Categories:</h3>
                 <table>
                     <tr>
                         <th>Description</th>
@@ -80,13 +140,54 @@
                         <td>25%+</td>
                     </tr>
                 </table>
+                <p class="disclaimer"><i class="fas fa-info-circle"></i> <strong>Note:</strong> Results may vary ±3% from professional methods like DEXA scans.</p>
             </div>
+        </div>
+
+        <div class="seo-content">
+            <h2>Why Body Fat Percentage Matters</h2>
+            <p>Unlike BMI which only considers height and weight, <strong>body fat percentage</strong> directly measures your body composition. This is important because:</p>
+            <ul>
+                <li>Muscle weighs more than fat (a lean person may be "overweight" by BMI)</li>
+                <li>Visceral fat (around organs) is more dangerous than subcutaneous fat</li>
+                <li>Helps track fitness progress more accurately than weight alone</li>
+            </ul>
+            
+            <h2>How to Reduce Body Fat Percentage</h2>
+            <p>For healthy fat loss:</p>
+            <ul>
+                <li>Combine strength training with cardio</li>
+                <li>Eat sufficient protein (1.6-2.2g per kg of body weight)</li>
+                <li>Maintain a modest calorie deficit (300-500 calories/day)</li>
+                <li>Get 7-9 hours of quality sleep nightly</li>
+                <li>Manage stress through meditation or yoga</li>
+            </ul>
         </div>
     </main>
 
-    <!-- Footer same as previous calculators -->
-    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> TadaConvert. All rights reserved.</p>
+            <ul>
+                <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                <li><a href="../policies/terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+                <li><a href="../calculators/bmi.html">BMI Calculator</a></li>
+                <li><a href="../calculators/bmr.html">BMR Calculator</a></li>
+            </ul>
+        </div>
+    </footer>
+
     <script src="../js/body-fat.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+        // Show/hide hip input based on gender
+        document.querySelectorAll('input[name="bf-gender"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('hip-input').style.display = 
+                    this.value === 'female' ? 'block' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>

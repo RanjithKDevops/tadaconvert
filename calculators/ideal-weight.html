@@ -3,18 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ideal Weight Calculator | TadaConvert</title>
+    <title>Ideal Weight Calculator: Healthy Weight Range by Height | TadaConvert</title>
+    <meta name="description" content="Calculate your ideal weight range based on height, gender and body frame size. Uses Devine, Robinson and Miller formulas for accurate results.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calculator.css">
     <link rel="icon" href="../images/favicon.ico">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Ideal Weight Calculator",
+        "url": "https://tadaconvert.com/calculators/ideal-weight.html",
+        "description": "Calculate healthy weight range based on height",
+        "applicationCategory": "HealthApplication"
+    }
+    </script>
+    <style>
+        .frame-size-guide {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e9f7fe;
+            border-radius: 8px;
+        }
+        .formula-info {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Header same as previous calculators -->
-    
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>TadaConvert</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                    <li><a href="../policies/terms.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main class="container calculator-container">
-        <h1>Ideal Weight Calculator</h1>
-        <p>Calculate your healthy weight range based on height and gender.</p>
+        <h1><i class="fas fa-balance-scale"></i> Ideal Weight Calculator</h1>
+        <p class="intro-text">Determine your <strong>healthy weight range</strong> based on height, gender and body frame size. This calculator combines multiple scientific formulas for accurate results.</p>
         
         <div class="calculator-form">
             <div class="input-group">
@@ -30,22 +68,96 @@
             <div class="input-group">
                 <label for="height-iw">Height (cm):</label>
                 <input type="number" id="height-iw" min="100" max="250" placeholder="Your height">
+                <p class="input-hint">1 cm = 0.39 inches | <a href="#" onclick="document.getElementById('height-iw').value=Math.round(document.getElementById('height-iw').value/2.54)">Switch to inches</a></p>
+            </div>
+            
+            <div class="input-group">
+                <label for="frame-size">Body Frame Size:</label>
+                <select id="frame-size">
+                    <option value="small">Small</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="large">Large</option>
+                </select>
             </div>
             
             <button onclick="calculateIdealWeight()" class="btn">Calculate Ideal Weight</button>
             
             <div id="result" class="result"></div>
             
-            <div class="ideal-weight-info">
-                <h3>About Ideal Weight:</h3>
-                <p>Ideal weight is calculated using the Devine formula and represents a healthy weight range for your height.</p>
-                <p>Note that these are estimates and individual factors like muscle mass and body composition can affect your ideal weight.</p>
+            <div class="frame-size-guide">
+                <h3><i class="fas fa-ruler-combined"></i> How to Determine Your Frame Size:</h3>
+                <p><strong>Method 1: Wrist Circumference</strong></p>
+                <ul>
+                    <li><strong>Men:</strong>
+                        <ul>
+                            <li>Small: < 16.5 cm (6.5")</li>
+                            <li>Medium: 16.5-18.5 cm (6.5"-7.3")</li>
+                            <li>Large: > 18.5 cm (7.3")</li>
+                        </ul>
+                    </li>
+                    <li><strong>Women:</strong>
+                        <ul>
+                            <li>Small: < 15 cm (5.9")</li>
+                            <li>Medium: 15-16 cm (5.9"-6.3")</li>
+                            <li>Large: > 16 cm (6.3")</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p><strong>Method 2: Elbow Breadth</strong> (more accurate - requires calipers)</p>
             </div>
+            
+            <div class="formula-info">
+                <h3><i class="fas fa-square-root-alt"></i> Formulas Used:</h3>
+                <ul>
+                    <li><strong>Devine Formula (1974):</strong> Most common medical standard</li>
+                    <li><strong>Robinson Formula (1983):</strong> More accurate for women</li>
+                    <li><strong>Miller Formula (1983):</strong> Updated for modern populations</li>
+                </ul>
+                <p>The calculator averages these formulas and adjusts for frame size.</p>
+            </div>
+        </div>
+
+        <div class="seo-content">
+            <h2>Understanding Ideal Weight</h2>
+            <p>Your <strong>ideal weight</strong> is a range (not a single number) that:</p>
+            <ul>
+                <li>Minimizes health risks associated with being under/overweight</li>
+                <li>Takes into account your body composition (muscle vs fat)</li>
+                <li>Varies based on gender and frame size</li>
+            </ul>
+            
+            <h2>Limitations of Ideal Weight Calculations</h2>
+            <p>These formulas don't account for:</p>
+            <ul>
+                <li>Muscle mass (athletes may healthily exceed the range)</li>
+                <li>Age-related changes in body composition</li>
+                <li>Ethnic differences in body fat distribution</li>
+                <li>Individual metabolic factors</li>
+            </ul>
+            
+            <h2>Healthy Weight Management Tips</h2>
+            <ul>
+                <li>Focus on body composition over weight alone</li>
+                <li>Aim for sustainable changes (0.5-1kg per week)</li>
+                <li>Combine strength training with cardio</li>
+                <li>Prioritize sleep and stress management</li>
+            </ul>
         </div>
     </main>
 
-    <!-- Footer same as previous calculators -->
-    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> TadaConvert. All rights reserved.</p>
+            <ul>
+                <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                <li><a href="../policies/terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+                <li><a href="../calculators/bmi.html">BMI Calculator</a></li>
+                <li><a href="../calculators/body-fat.html">Body Fat Calculator</a></li>
+            </ul>
+        </div>
+    </footer>
+
     <script src="../js/ideal-weight.js"></script>
     <script src="../js/main.js"></script>
 </body>

@@ -3,18 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMR Calculator | TadaConvert</title>
+    <title>BMR Calculator: Find Your Basal Metabolic Rate | TadaConvert</title>
+    <meta name="description" content="Calculate your Basal Metabolic Rate (BMR) - how many calories you burn at rest. Includes Harris-Benedict formula and activity level adjustments.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calculator.css">
     <link rel="icon" href="../images/favicon.ico">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "BMR Calculator",
+        "url": "https://tadaconvert.com/calculators/bmr.html",
+        "description": "Calculate Basal Metabolic Rate using Mifflin-St Jeor equation",
+        "applicationCategory": "HealthApplication"
+    }
+    </script>
 </head>
 <body>
-    <!-- Header same as previous calculators -->
-    
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>TadaConvert</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                    <li><a href="../policies/terms.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main class="container calculator-container">
-        <h1>BMR Calculator</h1>
-        <p>Calculate your Basal Metabolic Rate (calories your body needs at rest).</p>
+        <h1><i class="fas fa-fire"></i> BMR Calculator</h1>
+        <p class="intro-text">Your <strong>Basal Metabolic Rate (BMR)</strong> is the number of calories your body needs to maintain basic functions at complete rest. This is your "idle" calorie burn rate.</p>
         
         <div class="calculator-form">
             <div class="input-group">
@@ -35,11 +59,13 @@
             <div class="input-group">
                 <label for="bmr-weight">Weight (kg):</label>
                 <input type="number" id="bmr-weight" min="30" max="300" step="0.1" placeholder="Your weight">
+                <p class="input-hint">1 kg = 2.2 lbs | <a href="#" onclick="document.getElementById('bmr-weight').value=Math.round(document.getElementById('bmr-weight').value/0.453592)">Switch to lbs</a></p>
             </div>
             
             <div class="input-group">
                 <label for="bmr-height">Height (cm):</label>
                 <input type="number" id="bmr-height" min="100" max="250" placeholder="Your height">
+                <p class="input-hint">1 cm = 0.39 inches | <a href="#" onclick="document.getElementById('bmr-height').value=Math.round(document.getElementById('bmr-height').value/2.54)">Switch to inches</a></p>
             </div>
             
             <button onclick="calculateBMR()" class="btn">Calculate BMR</button>
@@ -48,21 +74,56 @@
             
             <div class="bmr-info">
                 <h3>About BMR:</h3>
-                <p>Your Basal Metabolic Rate (BMR) is the number of calories you'd burn if you stayed in bed all day. This is your body's "idle" calorie burn rate.</p>
-                <p>To calculate your total daily calorie needs, multiply your BMR by your activity level factor:</p>
+                <p>Your BMR accounts for 60-75% of your total daily calorie expenditure. It's calculated using the <strong>Mifflin-St Jeor Equation</strong>, the most accurate formula for estimating calorie needs.</p>
+                
+                <h3>Total Daily Calorie Needs:</h3>
+                <p>Multiply your BMR by your activity level factor:</p>
                 <ul>
-                    <li>Sedentary (little or no exercise): BMR × 1.2</li>
-                    <li>Lightly active (light exercise 1-3 days/week): BMR × 1.375</li>
-                    <li>Moderately active (moderate exercise 3-5 days/week): BMR × 1.55</li>
-                    <li>Very active (hard exercise 6-7 days/week): BMR × 1.725</li>
-                    <li>Extra active (very hard exercise & physical job): BMR × 1.9</li>
+                    <li><strong>Sedentary</strong> (little or no exercise): BMR × 1.2</li>
+                    <li><strong>Lightly active</strong> (light exercise 1-3 days/week): BMR × 1.375</li>
+                    <li><strong>Moderately active</strong> (moderate exercise 3-5 days/week): BMR × 1.55</li>
+                    <li><strong>Very active</strong> (hard exercise 6-7 days/week): BMR × 1.725</li>
+                    <li><strong>Extra active</strong> (very hard exercise & physical job): BMR × 1.9</li>
                 </ul>
             </div>
         </div>
+
+        <div class="seo-content">
+            <h2>What Affects Your BMR?</h2>
+            <p>Several factors influence your basal metabolic rate:</p>
+            <ul>
+                <li><strong>Muscle mass</strong> - Muscle burns more calories than fat at rest</li>
+                <li><strong>Age</strong> - Metabolism slows with age</li>
+                <li><strong>Gender</strong> - Men typically have higher BMR than women</li>
+                <li><strong>Body size</strong> - Larger bodies have higher BMR</li>
+                <li><strong>Genetics</strong> - Some inherit faster metabolisms</li>
+            </ul>
+            
+            <h2>How to Increase Your BMR</h2>
+            <p>Boost your metabolism by:</p>
+            <ul>
+                <li>Building muscle through strength training</li>
+                <li>Eating enough protein</li>
+                <li>Staying hydrated</li>
+                <li>Getting quality sleep</li>
+                <li>Managing stress levels</li>
+            </ul>
+        </div>
     </main>
 
-    <!-- Footer same as previous calculators -->
-    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> TadaConvert. All rights reserved.</p>
+            <ul>
+                <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                <li><a href="../policies/terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+                <li><a href="../calculators/calorie.html">Calorie Calculator</a></li>
+                <li><a href="../calculators/body-fat.html">Body Fat Calculator</a></li>
+            </ul>
+        </div>
+    </footer>
+
     <script src="../js/bmr.js"></script>
     <script src="../js/main.js"></script>
 </body>

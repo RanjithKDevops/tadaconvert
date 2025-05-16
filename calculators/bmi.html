@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI Calculator | TadaConvert</title>
+    <title>BMI Calculator: Measure Your Body Mass Index Online | TadaConvert</title>
+    <meta name="description" content="Free BMI calculator for adults & children. Calculate your Body Mass Index to determine if you're underweight, normal, overweight or obese. Includes healthy weight range.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calculator.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "BMI Calculator",
+        "url": "https://tadaconvert.com/calculators/bmi.html",
+        "description": "Calculate Body Mass Index (BMI) for adults",
+        "applicationCategory": "HealthApplication"
+    }
+    </script>
     <style>
         .bmi-chart {
             margin-top: 30px;
@@ -51,17 +59,19 @@
 
     <main class="container calculator-container">
         <h1><i class="fas fa-weight"></i> BMI Calculator</h1>
-        <p>Body Mass Index (BMI) is a measure of body fat based on height and weight.</p>
+        <p class="intro-text">Body Mass Index (BMI) is a reliable indicator of body fatness for most people. Calculate yours to see if you're at a <strong>healthy weight</strong> for your height.</p>
         
         <div class="calculator-form">
             <div class="input-group">
                 <label for="weight"><i class="fas fa-weight-hanging"></i> Weight (kg):</label>
                 <input type="number" id="weight" min="20" max="300" step="0.1" placeholder="Enter weight in kg">
+                <p class="input-hint">1 kg = 2.2 lbs | <a href="#" onclick="document.getElementById('weight').value=Math.round(document.getElementById('weight').value/0.453592)">Switch to lbs</a></p>
             </div>
             
             <div class="input-group">
                 <label for="height"><i class="fas fa-ruler-vertical"></i> Height (cm):</label>
                 <input type="number" id="height" min="100" max="250" step="0.1" placeholder="Enter height in cm">
+                <p class="input-hint">1 cm = 0.39 inches | <a href="#" onclick="document.getElementById('height').value=Math.round(document.getElementById('height').value/2.54)">Switch to inches</a></p>
             </div>
             
             <button onclick="calculateBMI()" class="btn"><i class="fas fa-calculator"></i> Calculate BMI</button>
@@ -71,13 +81,34 @@
             <div class="bmi-chart">
                 <h3><i class="fas fa-chart-bar"></i> BMI Categories:</h3>
                 <ul>
-                    <li><span class="bmi-category underweight">Underweight</span>: BMI < 18.5</li>
+                    <li><span class="bmi-category underweight">Underweight</span>: BMI &lt; 18.5</li>
                     <li><span class="bmi-category normal">Normal weight</span>: BMI 18.5-24.9</li>
                     <li><span class="bmi-category overweight">Overweight</span>: BMI 25-29.9</li>
                     <li><span class="bmi-category obese">Obesity</span>: BMI ≥ 30</li>
                 </ul>
-                <p class="disclaimer"><i class="fas fa-info-circle"></i> Note: BMI is a screening tool but not a diagnostic of body fatness or health.</p>
+                <p class="disclaimer"><i class="fas fa-info-circle"></i> <strong>Note:</strong> BMI doesn't account for muscle mass. Athletes may have higher BMI without excess fat.</p>
             </div>
+        </div>
+
+        <div class="seo-content">
+            <h2>What Is BMI?</h2>
+            <p><strong>Body Mass Index (BMI)</strong> is a simple calculation using your height and weight to screen for potential health problems. While not a direct measure of body fat, it correlates with more direct measures of body fat.</p>
+            
+            <h2>Why BMI Matters</h2>
+            <p>BMI helps identify:</p>
+            <ul>
+                <li>Potential <strong>weight-related health risks</strong></li>
+                <li>Whether you're at a <strong>healthy weight</strong> for your height</li>
+                <li>When to consider <strong>weight loss or gain</strong></li>
+            </ul>
+            
+            <h2>Limitations of BMI</h2>
+            <p>BMI may overestimate body fat in:</p>
+            <ul>
+                <li>Athletes with significant muscle mass</li>
+                <li>Pregnant women</li>
+                <li>The elderly who may have lost muscle</li>
+            </ul>
         </div>
     </main>
 
@@ -88,57 +119,13 @@
                 <li><a href="../policies/privacy.html">Privacy Policy</a></li>
                 <li><a href="../policies/terms.html">Terms of Service</a></li>
                 <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+                <li><a href="../calculators/body-fat.html">Body Fat Calculator</a></li>
+                <li><a href="../calculators/ideal-weight.html">Ideal Weight Calculator</a></li>
             </ul>
         </div>
     </footer>
 
     <script src="../js/bmi.js"></script>
     <script src="../js/main.js"></script>
-    <script>
-        // Enhanced BMI calculation with more detailed results
-        function calculateBMI() {
-            const weight = parseFloat(document.getElementById('weight').value);
-            const height = parseFloat(document.getElementById('height').value) / 100; // convert cm to m
-            
-            if (isNaN(weight) || isNaN(height) || height === 0) {
-                alert('Please enter valid weight and height');
-                return;
-            }
-            
-            const bmi = weight / (height * height);
-            const resultElement = document.getElementById('result');
-            
-            let category, color, icon;
-            if (bmi < 18.5) {
-                category = 'Underweight';
-                color = '#3498db';
-                icon = 'fa-face-frown';
-            } else if (bmi < 25) {
-                category = 'Normal weight';
-                color = '#2ecc71';
-                icon = 'fa-face-smile';
-            } else if (bmi < 30) {
-                category = 'Overweight';
-                color = '#f39c12';
-                icon = 'fa-face-meh';
-            } else {
-                category = 'Obese';
-                color = '#e74c3c';
-                icon = 'fa-face-frown-open';
-            }
-            
-            const healthyMin = (18.5 * height * height).toFixed(1);
-            const healthyMax = (24.9 * height * height).toFixed(1);
-            
-            resultElement.innerHTML = `
-                <div class="bmi-result" style="border-left: 5px solid ${color}">
-                    <h3><i class="fas ${icon}"></i> Your BMI: <strong>${bmi.toFixed(1)}</strong></h3>
-                    <p>Category: <strong style="color: ${color}">${category}</strong></p>
-                    <p>Healthy weight range for your height: <strong>${healthyMin}kg - ${healthyMax}kg</strong></p>
-                    ${bmi >= 25 ? '<p><i class="fas fa-lightbulb"></i> Tip: Consider consulting a health professional for personalized advice.</p>' : ''}
-                </div>
-            `;
-        }
-    </script>
 </body>
 </html>

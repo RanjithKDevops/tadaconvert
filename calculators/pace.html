@@ -1,81 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pace Calculator | TadaConvert</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/calculator.css">
-    <link rel="icon" href="../images/favicon.ico">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running Pace Calculator: Convert Pace Between min/km & min/mile | TadaConvert</title>
+  <meta name="description" content="Calculate your running pace per kilometer or mile. Convert between units and see equivalent speeds for 5K, 10K, half marathon and marathon races.">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/calculator.css">
+  <link rel="icon" href="../images/favicon.ico">
+  <script type="application/ld+json">
+  {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Running Pace Calculator",
+      "url": "https://tadaconvert.com/calculators/pace.html",
+      "description": "Calculate running pace per km or mile",
+      "applicationCategory": "SportsApplication"
+  }
+  </script>
+  <style>
+    .race-paces {
+      margin-top: 20px;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .race-paces table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .race-paces th, .race-paces td {
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    .race-paces th {
+      background-color: #e9ecef;
+    }
+    .unit-converter {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e9f7fe;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header same as previous calculators -->
-    
-    <main class="container calculator-container">
-        <h1>Pace Calculator</h1>
-        <p>Calculate your running pace per kilometer or mile.</p>
-        
-        <div class="calculator-form">
-            <div class="input-group">
-                <label for="distance">Distance:</label>
-                <input type="number" id="distance" min="1" max="100" step="0.1" placeholder="Distance">
-                <select id="distance-unit">
-                    <option value="km">Kilometers</option>
-                    <option value="mi">Miles</option>
-                </select>
-            </div>
-            
-            <div class="input-group">
-                <label for="time">Time:</label>
-                <div class="time-inputs">
-                    <input type="number" id="hours" min="0" max="24" placeholder="Hours">
-                    <span>:</span>
-                    <input type="number" id="minutes" min="0" max="59" placeholder="Minutes">
-                    <span>:</span>
-                    <input type="number" id="seconds" min="0" max="59" placeholder="Seconds">
-                </div>
-            </div>
-            
-            <button onclick="calculatePace()" class="btn">Calculate Pace</button>
-            
-            <div id="result" class="result"></div>
-            
-            <div class="pace-info">
-                <h3>Common Pace Conversions:</h3>
-                <table>
-                    <tr>
-                        <th>Pace (min/km)</th>
-                        <th>Speed (km/h)</th>
-                        <th>Pace (min/mi)</th>
-                        <th>Speed (mph)</th>
-                    </tr>
-                    <tr>
-                        <td>4:00</td>
-                        <td>15.0</td>
-                        <td>6:26</td>
-                        <td>9.3</td>
-                    </tr>
-                    <tr>
-                        <td>5:00</td>
-                        <td>12.0</td>
-                        <td>8:03</td>
-                        <td>7.5</td>
-                    </tr>
-                    <tr>
-                        <td>6:00</td>
-                        <td>10.0</td>
-                        <td>9:39</td>
-                        <td>6.2</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </main>
+  <header>
+    <div class="container">
+      <a href="../index.html" class="logo"><i class="fas fa-calculator"></i><span>TadaConvert</span></a>
+      <nav>
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+          <li><a href="../policies/terms.html">Terms of Service</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Footer same as previous calculators -->
+  <main class="container calculator-container">
+    <h1><i class="fas fa-running"></i> Pace Calculator</h1>
+    <p class="intro-text">Calculate your <strong>running pace</strong> per kilometer or mile, and see equivalent finish times for common race distances from 5K to marathon.</p>
     
-    <script src="../js/pace.js"></script>
-    <script src="../js/main.js"></script>
+    <div class="calculator-form">
+      <div class="input-group">
+        <label for="distance">Distance:</label>
+        <div class="input-with-unit">
+          <input type="number" id="distance" min="1" max="100" step="0.1" placeholder="Distance">
+          <select id="distance-unit">
+            <option value="km">Kilometers</option>
+            <option value="mi">Miles</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="time">Time:</label>
+        <div class="time-inputs">
+          <input type="number" id="hours" min="0" max="24" placeholder="Hours">
+          <span>:</span>
+          <input type="number" id="minutes" min="0" max="59" placeholder="Minutes">
+          <span>:</span>
+          <input type="number" id="seconds" min="0" max="59" placeholder="Seconds">
+        </div>
+      </div>
+
+      <button onclick="calculatePace()" class="btn">Calculate Pace</button>
+      <div id="result" class="result"></div>
+
+      <div class="unit-converter">
+        <h3><i class="fas fa-exchange-alt"></i> Quick Unit Converter</h3>
+        <p>1 kilometer = 0.621371 miles | 1 mile = 1.60934 kilometers</p>
+        <button onclick="convertPaceUnits()" class="btn-small">Switch Between min/mile and min/km</button>
+      </div>
+
+      <div class="race-paces">
+        <h3><i class="fas fa-medal"></i> Equivalent Race Times:</h3>
+        <table>
+          <tr>
+            <th>Distance</th>
+            <th>Time</th>
+            <th>Pace (min/km)</th>
+            <th>Pace (min/mile)</th>
+          </tr>
+          <tr>
+            <td>5K (5 km)</td>
+            <td id="time-5k">-</td>
+            <td id="pace-5k-km">-</td>
+            <td id="pace-5k-mi">-</td>
+          </tr>
+          <tr>
+            <td>10K (10 km)</td>
+            <td id="time-10k">-</td>
+            <td id="pace-10k-km">-</td>
+            <td id="pace-10k-mi">-</td>
+          </tr>
+          <tr>
+            <td>Half Marathon (21.1 km)</td>
+            <td id="time-half">-</td>
+            <td id="pace-half-km">-</td>
+            <td id="pace-half-mi">-</td>
+          </tr>
+          <tr>
+            <td>Marathon (42.2 km)</td>
+            <td id="time-marathon">-</td>
+            <td id="pace-marathon-km">-</td>
+            <td id="pace-marathon-mi">-</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="seo-content">
+      <!-- SEO content stays unchanged -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> TadaConvert. All rights reserved.</p>
+      <ul>
+        <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+        <li><a href="../policies/terms.html">Terms of Service</a></li>
+        <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+        <li><a href="../calculators/bmi.html">BMI Calculator</a></li>
+        <li><a href="../calculators/calorie.html">Calorie Calculator</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    function convertPaceUnits() {
+      const currentUnit = document.getElementById('distance-unit').value;
+      document.getElementById('distance-unit').value = currentUnit === 'km' ? 'mi' : 'km';
+      calculatePace();
+    }
+
+    function calculatePace() {
+      const distance = parseFloat(document.getElementById("distance").value);
+      const unit = document.getElementById("distance-unit").value;
+      const hours = parseInt(document.getElementById("hours").value || 0);
+      const minutes = parseInt(document.getElementById("minutes").value || 0);
+      const seconds = parseInt(document.getElementById("seconds").value || 0);
+
+      const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+      if (!distance || totalSeconds === 0) {
+        document.getElementById("result").innerHTML = "<p>Please enter a valid distance and time.</p>";
+        return;
+      }
+
+      const paceInSeconds = totalSeconds / distance;
+      const paceMinutes = Math.floor(paceInSeconds / 60);
+      const paceSeconds = Math.round(paceInSeconds % 60).toString().padStart(2, '0');
+
+      const paceStr = `${paceMinutes}:${paceSeconds} min/${unit}`;
+
+      let minPerKm = unit === "km" ? paceInSeconds / 60 : (paceInSeconds / 60) * 1.60934;
+
+      document.getElementById("result").innerHTML = `<p>Pace: <strong>${paceStr}</strong></p>`;
+      calculateEquivalentRaces(minPerKm);
+    }
+
+    function calculateEquivalentRaces(paceInMinPerKm) {
+      const distances = {
+        '5k': 5,
+        '10k': 10,
+        'half': 21.1,
+        'marathon': 42.2
+      };
+
+      for (const [race, dist] of Object.entries(distances)) {
+        const totalSeconds = paceInMinPerKm * dist * 60;
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = Math.floor(totalSeconds % 60);
+
+        document.getElementById(`time-${race}`).textContent =
+          `${hours > 0 ? hours + 'h ' : ''}${minutes}m ${seconds}s`;
+
+        document.getElementById(`pace-${race}-km`).textContent = 
+          `${Math.floor(paceInMinPerKm)}:${String(Math.round((paceInMinPerKm % 1) * 60)).padStart(2, '0')}`;
+
+        const pacePerMile = paceInMinPerKm * 1.60934;
+        document.getElementById(`pace-${race}-mi`).textContent =
+          `${Math.floor(pacePerMile)}:${String(Math.round((pacePerMile % 1) * 60)).padStart(2, '0')}`;
+      }
+    }
+  </script>
 </body>
 </html>

@@ -3,18 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calorie Calculator | TadaConvert</title>
+    <title>Calorie Calculator: Daily Calorie Needs for Weight Loss/Gain | TadaConvert</title>
+    <meta name="description" content="Calculate your daily calorie needs for maintenance, weight loss or muscle gain. Uses Harris-Benedict equation with activity level adjustments.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calculator.css">
     <link rel="icon" href="../images/favicon.ico">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Daily Calorie Calculator",
+        "url": "https://tadaconvert.com/calculators/calorie.html",
+        "description": "Calculate daily calorie needs based on activity level",
+        "applicationCategory": "HealthApplication"
+    }
+    </script>
+    <style>
+        .calorie-results {
+            margin-top: 20px;
+        }
+        .goal-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .goal-tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            background: #e9ecef;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        .goal-tab.active {
+            background: #007bff;
+            color: white;
+        }
+        .goal-content {
+            display: none;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 0 0 5px 5px;
+        }
+        .goal-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <!-- Similar header as BMI calculator -->
-    
+    <header>
+        <div class="container">
+            <a href="../index.html" class="logo">
+                <i class="fas fa-calculator"></i>
+                <span>TadaConvert</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                    <li><a href="../policies/terms.html">Terms of Service</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <main class="container calculator-container">
-        <h1>Calorie Calculator</h1>
-        <p>Estimate your daily calorie needs based on your activity level.</p>
+        <h1><i class="fas fa-utensils"></i> Calorie Calculator</h1>
+        <p class="intro-text">Calculate your <strong>daily calorie needs</strong> based on your activity level and fitness goals - whether you want to maintain, lose, or gain weight.</p>
         
         <div class="calculator-form">
             <div class="input-group">
@@ -35,11 +88,13 @@
             <div class="input-group">
                 <label for="weight">Weight (kg):</label>
                 <input type="number" id="weight" min="30" max="300" step="0.1" placeholder="Your weight">
+                <p class="input-hint">1 kg = 2.2 lbs | <a href="#" onclick="document.getElementById('weight').value=Math.round(document.getElementById('weight').value/0.453592)">Switch to lbs</a></p>
             </div>
             
             <div class="input-group">
                 <label for="height">Height (cm):</label>
                 <input type="number" id="height" min="100" max="250" placeholder="Your height">
+                <p class="input-hint">1 cm = 0.39 inches | <a href="#" onclick="document.getElementById('height').value=Math.round(document.getElementById('height').value/2.54)">Switch to inches</a></p>
             </div>
             
             <div class="input-group">
@@ -47,7 +102,7 @@
                 <select id="activity">
                     <option value="1.2">Sedentary (little or no exercise)</option>
                     <option value="1.375">Lightly active (light exercise 1-3 days/week)</option>
-                    <option value="1.55">Moderately active (moderate exercise 3-5 days/week)</option>
+                    <option value="1.55" selected>Moderately active (moderate exercise 3-5 days/week)</option>
                     <option value="1.725">Very active (hard exercise 6-7 days/week)</option>
                     <option value="1.9">Extra active (very hard exercise & physical job)</option>
                 </select>
@@ -56,12 +111,93 @@
             <button onclick="calculateCalories()" class="btn">Calculate Calories</button>
             
             <div id="result" class="result"></div>
+            
+            <div class="goal-tabs">
+                <div class="goal-tab active" onclick="showGoal('maintenance')">Maintenance</div>
+                <div class="goal-tab" onclick="showGoal('weight-loss')">Weight Loss</div>
+                <div class="goal-tab" onclick="showGoal('muscle-gain')">Muscle Gain</div>
+            </div>
+            
+            <div class="goal-content active" id="maintenance">
+                <h3><i class="fas fa-balance-scale"></i> Maintenance Calories</h3>
+                <p>This is your <strong>Total Daily Energy Expenditure (TDEE)</strong> - the calories needed to maintain your current weight.</p>
+                <p>To maintain weight, eat this amount consistently while maintaining your current activity level.</p>
+            </div>
+            
+            <div class="goal-content" id="weight-loss">
+                <h3><i class="fas fa-weight-loss"></i> Weight Loss Approach</h3>
+                <p>For healthy weight loss (0.5-1kg per week):</p>
+                <ul>
+                    <li>Reduce calories by 300-500 below maintenance</li>
+                    <li>Prioritize protein (1.6-2.2g per kg of body weight)</li>
+                    <li>Combine strength training with cardio</li>
+                    <li>Aim for 1% body weight loss per week maximum</li>
+                </ul>
+            </div>
+            
+            <div class="goal-content" id="muscle-gain">
+                <h3><i class="fas fa-dumbbell"></i> Muscle Gain Approach</h3>
+                <p>For lean muscle gain (0.25-0.5kg per week):</p>
+                <ul>
+                    <li>Increase calories by 200-300 above maintenance</li>
+                    <li>Eat 1.6-2.2g protein per kg of body weight</li>
+                    <li>Follow a progressive strength training program</li>
+                    <li>Prioritize recovery (sleep 7-9 hours nightly)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="seo-content">
+            <h2>How Calorie Needs Are Calculated</h2>
+            <p>This calculator uses the <strong>Mifflin-St Jeor Equation</strong> to estimate your Basal Metabolic Rate (BMR), then adjusts for activity level using these multipliers:</p>
+            
+            <h3>Activity Level Definitions</h3>
+            <ul>
+                <li><strong>Sedentary:</strong> Little or no exercise (desk job)</li>
+                <li><strong>Lightly Active:</strong> Light exercise 1-3 days/week</li>
+                <li><strong>Moderately Active:</strong> Moderate exercise 3-5 days/week</li>
+                <li><strong>Very Active:</strong> Hard exercise 6-7 days/week</li>
+                <li><strong>Extra Active:</strong> Very hard exercise & physical job</li>
+            </ul>
+            
+            <h2>Factors Affecting Calorie Needs</h2>
+            <p>Your actual calorie needs may vary due to:</p>
+            <ul>
+                <li>Muscle mass (muscle burns more calories than fat)</li>
+                <li>Genetics and metabolic health</li>
+                <li>Non-exercise activity (NEAT) like fidgeting</li>
+                <li>Hormonal factors</li>
+            </ul>
         </div>
     </main>
 
-    <!-- Similar footer as BMI calculator -->
-    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> TadaConvert. All rights reserved.</p>
+            <ul>
+                <li><a href="../policies/privacy.html">Privacy Policy</a></li>
+                <li><a href="../policies/terms.html">Terms of Service</a></li>
+                <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+                <li><a href="../calculators/bmr.html">BMR Calculator</a></li>
+                <li><a href="../calculators/body-fat.html">Body Fat Calculator</a></li>
+            </ul>
+        </div>
+    </footer>
+
     <script src="../js/calorie.js"></script>
     <script src="../js/main.js"></script>
+    <script>
+        function showGoal(goal) {
+            document.querySelectorAll('.goal-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.goal-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelector(`.goal-tab[onclick="showGoal('${goal}')"]`).classList.add('active');
+            document.getElementById(goal).classList.add('active');
+        }
+    </script>
 </body>
 </html>

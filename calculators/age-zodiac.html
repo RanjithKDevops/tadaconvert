@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Age & Zodiac Calculator | TadaConvert</title>
+    <title>Age & Zodiac Calculator: Find Your Exact Age & Star Sign | TadaConvert</title>
+    <meta name="description" content="Calculate your exact age in years, months & days plus discover your zodiac sign traits, compatibility & horoscope. Free online age calculator with zodiac details.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/calculator.css">
     <link rel="icon" href="../images/favicon.ico">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5699527971423685" crossorigin="anonymous"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Age & Zodiac Calculator",
+        "url": "https://tadaconvert.com/calculators/age-zodiac.html",
+        "description": "Calculate exact age and zodiac sign information",
+        "applicationCategory": "LifestyleApplication"
+    }
+    </script>
     <style>
         .zodiac-details {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -52,17 +62,19 @@
 
     <main class="container calculator-container">
         <h1>Age & Zodiac Calculator</h1>
-        <p>Calculate your exact age and discover detailed information about your zodiac sign</p>
+        <p class="intro-text">Discover your <strong>exact age</strong> in years, months, and days, plus detailed information about your <strong>zodiac sign</strong>, including personality traits, compatibility, and ruling planets.</p>
         
         <div class="calculator-form">
             <div class="input-group">
-                <label for="birthdate">Birth Date:</label>
+                <label for="birthdate">Your Birth Date:</label>
                 <input type="date" id="birthdate" max="">
+                <p class="input-hint">Enter your date of birth to calculate your exact age</p>
             </div>
             
             <div class="input-group">
                 <label for="compare-date">Compare Date (optional):</label>
                 <input type="date" id="compare-date" max="">
+                <p class="input-hint">See how old you were/will be on any date</p>
             </div>
             
             <button onclick="calculateAge()" class="btn">Calculate Age & Zodiac</button>
@@ -72,14 +84,33 @@
             <div id="zodiac-info" class="zodiac-details" style="display: none;">
                 <div class="zodiac-header">
                     <div class="zodiac-symbol" id="zodiac-symbol"></div>
-                    <h3>Your Zodiac Sign: <span id="zodiac-sign"></span></h3>
+                    <h2>Your Zodiac Sign: <span id="zodiac-sign"></span></h2>
                     <p><strong>Date Range:</strong> <span id="zodiac-dates"></span></p>
                     <p><strong>Element:</strong> <span id="zodiac-element"></span></p>
                     <p><strong>Ruling Planet:</strong> <span id="zodiac-planet"></span></p>
                 </div>
                 <div id="zodiac-description"></div>
+                <h3>Key Personality Traits:</h3>
                 <div class="zodiac-traits" id="zodiac-traits"></div>
+                <div class="zodiac-compatibility">
+                    <h3>Most Compatible With:</h3>
+                    <p id="zodiac-compatibility"></p>
+                </div>
             </div>
+        </div>
+
+        <div class="seo-content">
+            <h2>What Is a Zodiac Sign?</h2>
+            <p>Your <strong>zodiac sign</strong> (also called sun sign or star sign) is determined by your birth date and represents your position relative to constellations at birth. The 12 signs of the zodiac each have unique personality traits, strengths, and weaknesses.</p>
+            
+            <h2>How to Use This Age Calculator</h2>
+            <p>Simply enter your birth date to calculate:</p>
+            <ul>
+                <li>Your <strong>exact age</strong> in years, months, and days</li>
+                <li>Your <strong>zodiac sign</strong> and its meaning</li>
+                <li>Compatibility with other signs</li>
+                <li>Key personality traits associated with your sign</li>
+            </ul>
         </div>
     </main>
 
@@ -90,6 +121,8 @@
                 <li><a href="../policies/privacy.html">Privacy Policy</a></li>
                 <li><a href="../policies/terms.html">Terms of Service</a></li>
                 <li><a href="mailto:contact@tadaconvert.com">Contact Us</a></li>
+                <li><a href="../calculators/bmi.html">BMI Calculator</a></li>
+                <li><a href="../calculators/calorie.html">Calorie Calculator</a></li>
             </ul>
         </div>
     </footer>
